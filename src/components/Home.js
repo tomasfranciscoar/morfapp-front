@@ -1,0 +1,56 @@
+import React, { Component } from "react";
+import { searchRecipe } from "../services/recipes-services";
+
+class Home extends Component {
+    
+  state = {
+    ingredient: "",
+    foundRecipes: []
+  };
+
+  handleChange = event => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  };
+
+  handleSubmitSearch = e => {
+    e.preventDefault();
+    let { ingredient, foundRecipes } = this.state;
+    searchRecipe(ingredient);
+    this.setState({ ingredient });
+    console.log(ingredient);
+  };
+
+  render() {
+    console.log('local Storage desde Home.js: ', window.localStorage)
+    console.log('props desde Home.js: ', this.props)
+    return (
+      <div className="Home main-container">
+        <img
+          src={require("../images/HatchfulExport-All/logo_transparent copy.png")}
+          alt="morfapp-logo"
+          style={{ width: "450px", marginBottom: "20px" }}
+        />
+        <form onSubmit={this.handleSubmitSearch}>
+          <input
+            className="uk-input uk-form-width-large"
+            placeholder="Type your available ingredients..."
+            onChange={this.handleChange}
+            type="text"
+            name="ingredient"
+            value={this.state.ingredient}
+          />
+          <p>
+            <input
+              className="uk-button uk-button-primary"
+              type="submit"
+              value="Search!"
+            />
+          </p>
+        </form>
+      </div>
+    );
+  }
+}
+
+export default Home;
