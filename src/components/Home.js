@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { searchRecipe } from "../services/recipes-services";
+import Recipes from "./Recipes";
 
 class Home extends Component {
-    
   state = {
     ingredient: "",
     foundRecipes: []
@@ -16,14 +16,21 @@ class Home extends Component {
   handleSubmitSearch = e => {
     e.preventDefault();
     let { ingredient, foundRecipes } = this.state;
-    searchRecipe(ingredient);
-    this.setState({ ingredient });
-    console.log(ingredient);
+    searchRecipe(ingredient)
+      .then(recipes => {
+        foundRecipes = recipes;
+      })
+      .then(() => {
+        this.setState({ foundRecipes })
+      })
+    console.log("Los ingredientes: ", ingredient);
+    setTimeout(() => {
+      console.log("Las recetas: ", foundRecipes);
+    }, 1000);
   };
 
   render() {
-    console.log('local Storage desde Home.js: ', window.localStorage)
-    console.log('props desde Home.js: ', this.props)
+    let {foundRecipes} = this.state;
     return (
       <div className="Home main-container">
         <img
@@ -48,6 +55,7 @@ class Home extends Component {
             />
           </p>
         </form>
+        {foundRecipes.length ? <Recipes recipes={foundRecipes} /> : null}
       </div>
     );
   }

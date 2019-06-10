@@ -12,10 +12,11 @@ class Router extends React.Component {
     super(props);
     this.state = { loggedInUser: null };
   }
-  
+
+
   getTheUser = userObj => {
-    this.setState({ loggedInUser: userObj });
-  };
+      this.setState({ loggedInUser: userObj });
+    }
 
   render() {
     let {loggedInUser} = this.state

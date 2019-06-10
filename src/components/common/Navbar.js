@@ -5,6 +5,7 @@ import NavbarNoUser from "./NavbarNoUser";
 class Navbar extends Component {
   
   checkIfUser = () => {
+    console.log(this.props)
     let token = this.props.isLogged
     return token ? <NavbarWithUser /> : <NavbarNoUser />;
   }
