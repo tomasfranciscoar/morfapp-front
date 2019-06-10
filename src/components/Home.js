@@ -26,7 +26,7 @@ class Home extends Component {
     console.log("Los ingredientes: ", ingredient);
     setTimeout(() => {
       console.log("Las recetas: ", foundRecipes);
-    }, 1000);
+    }, 3000);
   };
 
   render() {
