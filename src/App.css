@@ -44,11 +44,9 @@
 
 /* components/Home.js */
 
-.Home {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.home-container {
+  position: relative;
+  top: 100px;
 }
 
 .Footer {
@@ -64,4 +62,8 @@
 
 .Footer p {
   margin: 0;
+}
+
+.Recipes li {
+  text-align: left;
 }

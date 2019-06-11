@@ -33,6 +33,7 @@ class Home extends Component {
     let {foundRecipes} = this.state;
     return (
       <div className="Home main-container">
+        <div className="home-container">
         <img
           src={require("../images/HatchfulExport-All/logo_transparent copy.png")}
           alt="morfapp-logo"
@@ -56,6 +57,7 @@ class Home extends Component {
           </p>
         </form>
         {foundRecipes.length ? <Recipes recipes={foundRecipes} /> : null}
+        </div>
       </div>
     );
   }
