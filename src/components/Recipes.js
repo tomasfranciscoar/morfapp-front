@@ -1,7 +1,6 @@
 import React from "react";
-import {Link} from "react-router-dom";
 
-const Recipes = ({ recipes }) => (
+const Recipes = ({ recipes, searchLabel }) => (
   <div className="Recipes main-container">
     <div className="uk-child-width-1-3@m" uk-grid="true">
       {recipes.map((recipe, i) => (
@@ -21,7 +20,7 @@ const Recipes = ({ recipes }) => (
           <div className="uk-card-footer">
             <p>Health-Labels:</p>
             {recipe.recipe.healthLabels.map(label => (
-              <Link>#{label.toUpperCase()}  </Link>
+              <p name="label" value={label} onClick={searchLabel}>#{label.toUpperCase()}  </p>
             ))}
           </div>
         </div>

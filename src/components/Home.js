@@ -29,6 +29,18 @@ class Home extends Component {
     }, 3000);
   };
 
+  handleSearchLabels = e => {
+    const { value } = e.target;
+    let { foundRecipes} = this.state;
+    searchRecipe(value)
+    .then(recipes => {
+      foundRecipes = recipes;
+    })
+    .then(() => {
+      this.setState({foundRecipes})
+    })
+  }
+
   render() {
     let {foundRecipes} = this.state;
     return (
@@ -56,7 +68,7 @@ class Home extends Component {
             />
           </p>
         </form>
-        {foundRecipes.length ? <Recipes recipes={foundRecipes} /> : null}
+        {foundRecipes.length ? <Recipes recipes={foundRecipes} searchLabel={this.handleSearchLabels} /> : null}
         </div>
       </div>
     );
