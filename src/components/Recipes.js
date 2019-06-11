@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 const Recipes = ({ recipes }) => (
   <div className="Recipes main-container">
@@ -16,6 +17,12 @@ const Recipes = ({ recipes }) => (
                 <li>{ingredient}</li>
               ))}
             </ul>
+          </div>
+          <div className="uk-card-footer">
+            <p>Health-Labels:</p>
+            {recipe.recipe.healthLabels.map(label => (
+              <Link>#{label.toUpperCase()}  </Link>
+            ))}
           </div>
         </div>
       ))}
