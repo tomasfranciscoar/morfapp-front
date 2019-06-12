@@ -1,13 +1,12 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import "./App.css";
 import Router from "./Router";
 
 class App extends Component {
-  
   render() {
     return (
-      <div className="App" style={{backgroundImage: this.randomBackground}}>
-        <Router />
+      <div className="App">
+          <Router />
       </div>
     );
   }
