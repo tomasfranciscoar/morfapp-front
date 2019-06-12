@@ -10,9 +10,6 @@ class Navbar extends Component {
   }
 
   render() {
-    console.log('props desde la navbar: ', this.props)
-    console.log('local storash desde la navbar: ', window.localStorage)
-    console.log('el state desde la navbar: ', this.state)
     return(
       <div className="Navbar">
         {this.checkIfUser()}

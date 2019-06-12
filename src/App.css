@@ -26,10 +26,10 @@
 .main-container {
   height: calc(100vh - 80px);
   width: 100vw;
-  background: url("./images/lukas-blazek-261682-unsplash.jpg") no-repeat center center fixed;
-  -webkit-background-size: cover;
+  background: url("./images/lukas-blazek-261682-unsplash.jpg") center center fixed;
+  /* -webkit-background-size: cover;
   -moz-background-size: cover;
-  -o-background-size: cover;
+  -o-background-size: cover; */
   background-size: cover;
 }
 
@@ -66,4 +66,8 @@
 
 .Recipes li {
   text-align: left;
+}
+
+.health-label {
+  margin: 5px;
 }

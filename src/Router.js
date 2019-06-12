@@ -6,6 +6,7 @@ import Navbar from "./components/common/Navbar";
 import Home from "./components/Home";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
+import RecipeDetail from "./components/RecipeDetail";
 
 class Router extends React.Component {
   constructor(props) {
@@ -25,6 +26,7 @@ class Router extends React.Component {
         <Navbar isLogged={loggedInUser} />
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/recipe/:id" render={(props) => <RecipeDetail {...props} />} />
           <Route
             exact
             path="/signup"
