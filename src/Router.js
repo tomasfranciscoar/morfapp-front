@@ -14,28 +14,31 @@ class Router extends React.Component {
     this.state = { loggedInUser: null };
   }
 
-
   getTheUser = userObj => {
-      this.setState({ loggedInUser: userObj });
-    }
+    this.setState({ loggedInUser: userObj });
+  };
 
   render() {
-    let {loggedInUser} = this.state
+    let { loggedInUser } = this.state;
     return (
       <div className="Router">
         <Navbar isLogged={loggedInUser} />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/recipe/:id" render={(props) => <RecipeDetail {...props} />} />
+          <Route
+            exact
+            path="/recipe/:id"
+            render={props => <RecipeDetail {...props} />}
+          />
           <Route
             exact
             path="/signup"
-            render={(props) => <Signup {...props} getUser={this.getTheUser} />}
+            render={props => <Signup {...props} getUser={this.getTheUser} />}
           />
           <Route
             exact
             path="/login"
-            render={(props) => <Login {...props} getUser={this.getTheUser} />}
+            render={props => <Login {...props} getUser={this.getTheUser} />}
           />
         </Switch>
       </div>

@@ -1,8 +1,6 @@
 import React from "react";
 
 const RecipeDetail = props => {
-  console.log("las props desde recipedetail: ", props);
-  const { id } = props.match.params;
   return (
     <div>
       <div

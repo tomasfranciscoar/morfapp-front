@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import RecipeDetail from "./RecipeDetail";
 
 class Recipes extends Component {
   render() {
-    const { recipes, searchLabel } = this.props;
+    const { recipes, searchLabel, showDetailedRecipe } = this.props;
     return (
       <div className="Recipes main-container">
         <div className="uk-child-width-1-3@m" uk-grid="true">
@@ -11,26 +11,13 @@ class Recipes extends Component {
             <div
               key={i}
               className="uk-card uk-card-default uk-card-hover uk-card-small"
+              onClick={() => showDetailedRecipe(i)}
             >
               <div className="uk-card-media-top">
-                <Link
-                  to={`/recipe/${recipe.recipe.uri.slice(
-                    recipe.recipe.uri.indexOf("_") + 1,
-                    recipe.recipe.uri.length
-                  )}`}
-                >
-                  <img src={recipe.recipe.image} alt={recipe.recipe.label} />
-                </Link>
+                <img src={recipe.recipe.image} alt={recipe.recipe.label} />
               </div>
               <div className="uk-card-body">
-                <Link
-                  to={`/recipe/${recipe.recipe.uri.slice(
-                    recipe.recipe.uri.indexOf("_") + 1,
-                    recipe.recipe.uri.length
-                  )}`}
-                >
-                  <h3 className="uk-card-title">{recipe.recipe.label}</h3>
-                </Link>
+                <h3 className="uk-card-title">{recipe.recipe.label}</h3>
                 <p>Ingredients:</p>
                 <ul>
                   {recipe.recipe.ingredientLines

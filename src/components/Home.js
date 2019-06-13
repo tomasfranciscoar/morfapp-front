@@ -5,7 +5,8 @@ import Recipes from "./Recipes";
 class Home extends Component {
   state = {
     ingredient: "",
-    foundRecipes: []
+    foundRecipes: [],
+    detailedRecipe: {}
   };
 
   handleChange = event => {
@@ -41,8 +42,17 @@ class Home extends Component {
       });
   };
 
+  handleShowDetailedRecipe = (index) => {
+    // const { value } = e.target;
+    let { detailedRecipe, foundRecipes } = this.state;
+    detailedRecipe = foundRecipes[index];
+    foundRecipes = [];
+    console.log('la detailedRecipe: ', detailedRecipe)
+    this.setState({ foundRecipes, detailedRecipe });
+  };
+
   render() {
-    let { foundRecipes } = this.state;
+    let { foundRecipes, detailedRecipe } = this.state;
     return (
       <div className="Home main-container">
         <div className="home-container">
@@ -72,6 +82,7 @@ class Home extends Component {
             <Recipes
               recipes={foundRecipes}
               searchLabel={this.handleSearchLabels}
+              showDetailedRecipe={this.handleShowDetailedRecipe}
             />
           ) : null}
         </div>
