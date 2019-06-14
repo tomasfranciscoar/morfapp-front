@@ -43,10 +43,9 @@ class Home extends Component {
   };
 
   handleShowDetailedRecipe = (index) => {
-    // const { value } = e.target;
     let { detailedRecipe, foundRecipes } = this.state;
     detailedRecipe = foundRecipes[index];
-    foundRecipes = [];
+    // foundRecipes = [];
     console.log('la detailedRecipe: ', detailedRecipe)
     this.setState({ foundRecipes, detailedRecipe });
   };
@@ -81,6 +80,7 @@ class Home extends Component {
           {foundRecipes.length ? (
             <Recipes
               recipes={foundRecipes}
+              detailedRecipe={detailedRecipe}
               searchLabel={this.handleSearchLabels}
               showDetailedRecipe={this.handleShowDetailedRecipe}
             />

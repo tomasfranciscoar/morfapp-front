@@ -1,6 +1,6 @@
 import React from "react";
 
-const RecipeDetail = props => {
+const RecipeDetail = ({detailedRecipe}) => {
   return (
     <div>
       <div
@@ -8,16 +8,17 @@ const RecipeDetail = props => {
         uk-grid="true"
       >
         <div className="uk-card-media-left uk-cover-container">
-          <img src="images/light.jpg" alt="" uk-cover="true" />
+          <img src={detailedRecipe.recipe.image} alt={detailedRecipe.recipe.label} uk-cover="true" />
           <canvas width="600" height="400" />
         </div>
         <div>
           <div className="uk-card-body">
-            <h3 className="uk-card-title">Media Left</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt.
-            </p>
+            <h3 className="uk-card-title">{detailedRecipe.recipe.label}</h3>
+            <ul>
+              {detailedRecipe.recipe.ingredientLines.map((ingredient, i) => 
+              <li key={i}>{ingredient}</li>
+              )}
+            </ul>
           </div>
         </div>
       </div>
