@@ -35,7 +35,7 @@
 
 /* components/auth/signup.js */
 
-.auth-form {
+.custom-form {
   display: flex;
   flex-direction: column;
   justify-content: center;

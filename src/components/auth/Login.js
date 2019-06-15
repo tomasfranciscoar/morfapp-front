@@ -45,7 +45,7 @@ class Login extends Component {
   render() {
     const {username, password, error} = this.state.auth;
     return (
-      <div className="auth-form main-container">
+      <div className="custom-form main-container">
         <h2>Log In</h2>
         <form className="uk-form-stacked" onSubmit={this.handleFormSubmit}>
           <p>

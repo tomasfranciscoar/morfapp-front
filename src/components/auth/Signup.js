@@ -46,7 +46,7 @@ class Signup extends Component {
   render() {
     const {name, lastname, email, username, password} = this.state.auth
     return (
-      <div className="auth-form main-container">
+      <div className="custom-form main-container">
         <h2>Sign Up</h2>
         <form className="uk-form-stacked" onSubmit={this.handleFormSubmit}>
           <p>
