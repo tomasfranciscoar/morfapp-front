@@ -17,7 +17,7 @@ class NavbarWithUser extends Component {
               <Link to="#">Recipes</Link>
             </li>
             <li>
-              <Link to="#">Upload</Link>
+              <Link to="/recipe/new">Upload</Link>
             </li>
           </ul>
         </div>

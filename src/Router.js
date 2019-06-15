@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
 import RecipeDetail from "./components/RecipeDetail";
+import RecipeForm from "./components/RecipeForm";
 
 class Router extends React.Component {
   constructor(props) {
@@ -25,11 +26,11 @@ class Router extends React.Component {
         <Navbar isLogged={loggedInUser} />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route
+          {/* <Route
             exact
             path="/recipe/:id"
             render={props => <RecipeDetail {...props} />}
-          />
+          /> */}
           <Route
             exact
             path="/signup"
@@ -40,6 +41,7 @@ class Router extends React.Component {
             path="/login"
             render={props => <Login {...props} getUser={this.getTheUser} />}
           />
+          <Route exact path="/recipe/new" component={RecipeForm}/>
         </Switch>
       </div>
     );
