@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import RecipeDetail from "./RecipeDetail";
 
 const Recipes = ({
@@ -14,8 +14,8 @@ const Recipes = ({
           <div
             key={i}
             className="uk-card uk-card-default uk-card-hover uk-card-small"
-            onClick={() => showDetailedRecipe(i)}
           >
+            <div onClick={() => showDetailedRecipe(i)}>
             <div className="uk-card-media-top">
               <img src={recipe.recipe.image} alt={recipe.recipe.label} />
             </div>
@@ -33,6 +33,7 @@ const Recipes = ({
                     </li>
                   ))}
               </ul>
+            </div>
             </div>
             <div className="uk-card-footer">
               {recipe.recipe.healthLabels.map((label, i) => (

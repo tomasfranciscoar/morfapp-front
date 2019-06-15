@@ -1,8 +1,8 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { uploadRecipe } from "../services/recipes-services";
+import Swal from "sweetalert2";
 
 class RecipeForm extends Component {
-
   state = {
     recipe: {
       name: "",
@@ -10,14 +10,14 @@ class RecipeForm extends Component {
       difficulty: "",
       image: ""
     }
-  }
+  };
 
   handleChange = e => {
-    const { recipe } = this.state
-    let field = e.target.name
-    recipe[field] = e.target.value
-    this.setState({ recipe })
-  }
+    const { recipe } = this.state;
+    let field = e.target.name;
+    recipe[field] = e.target.value;
+    this.setState({ recipe });
+  };
 
   handleFormSubmit = e => {
     e.preventDefault();
@@ -25,14 +25,25 @@ class RecipeForm extends Component {
   };
 
   onUpload = () => {
-    const {recipe} = this.state;
+    const { recipe } = this.state;
     uploadRecipe(recipe)
-    .then(rec => console.log('recipe upload successful! ', rec))
-    .catch(error => console.log(error))
-  }
+      .then(rec =>
+        console.log(
+          "recipe upload successful! ",
+          rec,
+          Swal.fire({
+            title: "Success!",
+            text: "Your recipe has been successfully uploaded",
+            type: "success",
+            confirmButtonText: "Cool"
+          })
+        )
+      )
+      .catch(error => console.log(error));
+  };
 
   render() {
-    let {name, ingredients, difficulty, image} = this.state.recipe
+    let { name, ingredients } = this.state.recipe;
     return (
       <div className="custom-form main-container">
         <form onSubmit={this.handleFormSubmit} className="uk-form-stacked">
@@ -55,7 +66,11 @@ class RecipeForm extends Component {
             />
           </p>
           <p>
-            <select onChange={this.handleChange} name="difficulty" className="uk-select uk-form-width-medium">
+            <select
+              onChange={this.handleChange}
+              name="difficulty"
+              className="uk-select uk-form-width-medium"
+            >
               <option selected={true} disabled={true}>
                 Difficulty level
               </option>

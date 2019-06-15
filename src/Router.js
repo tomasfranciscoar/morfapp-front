@@ -6,7 +6,6 @@ import Navbar from "./components/common/Navbar";
 import Home from "./components/Home";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
-import RecipeDetail from "./components/RecipeDetail";
 import RecipeForm from "./components/RecipeForm";
 
 class Router extends React.Component {
