@@ -13,7 +13,13 @@ export const searchRecipe = ingredient => {
 };
 
 export const uploadRecipe = recipe => {
-  return axios.post(`${local_url}/new`, recipe)
+  return axios.post(`${local_url}/new`, recipe, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
   .then(res => res.data.recipe)
   .catch(error => error)
 };
+
+

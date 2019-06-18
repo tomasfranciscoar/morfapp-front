@@ -8,15 +8,21 @@ class RecipeForm extends Component {
       name: "",
       ingredients: "",
       difficulty: "",
-      image: ""
-    }
+      images: []
+    },
+    recipes: []
   };
 
   handleChange = e => {
     const { recipe } = this.state;
     let field = e.target.name;
+    if (e.target.files) {
+      recipe.image = e.target.files;
+      return this.setState({ recipe });
+    }
     recipe[field] = e.target.value;
     this.setState({ recipe });
+    console.log(recipe)
   };
 
   handleFormSubmit = e => {
@@ -25,19 +31,29 @@ class RecipeForm extends Component {
   };
 
   onUpload = () => {
-    const { recipe } = this.state;
-    uploadRecipe(recipe)
-      .then(rec =>
-        console.log(
-          "recipe upload successful! ",
-          rec,
-          Swal.fire({
-            title: "Success!",
-            text: "Your recipe has been successfully uploaded",
-            type: "success",
-            confirmButtonText: "Cool"
-          })
-        )
+    let { recipe, recipes } = this.state;
+    const formData = new FormData()
+    if(recipe.image) {
+      for (let image of recipe.image) {
+        formData.append('images', image)
+      }
+      delete recipe.image
+    }
+    
+    for(let key in recipe) {
+      formData.append(key, recipe[key])
+    }
+
+    uploadRecipe(formData)
+      .then(
+        recipe => console.log("recipe upload successful! ", recipe),
+        Swal.fire({
+          title: "Success!",
+          text: "Your recipe has been successfully uploaded",
+          type: "success",
+          confirmButtonText: "Cool"
+        }),
+        this.props.history.push("/")
       )
       .catch(error => console.log(error));
   };
@@ -84,10 +100,11 @@ class RecipeForm extends Component {
           <p>
             <input
               className="uk-input uk-form-width-large"
-              placeholder="Image"
+              placeholder="Images"
               type="file"
-              name="image"
+              name="images"
               onChange={this.handleChange}
+              multiple
             />
           </p>
           <p>
