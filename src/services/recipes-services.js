@@ -15,6 +15,7 @@ export const searchRecipe = ingredient => {
 export const uploadRecipe = recipe => {
   return axios.post(`${local_url}/new`, recipe, {
     headers: {
+      Authorization: localStorage.getItem('TOKEN'),
       'Content-Type': 'multipart/form-data'
     }
   })

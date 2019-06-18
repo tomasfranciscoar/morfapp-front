@@ -17,7 +17,7 @@ class RecipeForm extends Component {
     const { recipe } = this.state;
     let field = e.target.name;
     if (e.target.files) {
-      recipe.image = e.target.files;
+      recipe.images = e.target.files;
       return this.setState({ recipe });
     }
     recipe[field] = e.target.value;
@@ -31,13 +31,13 @@ class RecipeForm extends Component {
   };
 
   onUpload = () => {
-    let { recipe, recipes } = this.state;
+    let { recipe } = this.state;
     const formData = new FormData()
-    if(recipe.image) {
-      for (let image of recipe.image) {
+    if(recipe.images) {
+      for (let image of recipe.images) {
         formData.append('images', image)
       }
-      delete recipe.image
+      // delete recipe.images
     }
     
     for(let key in recipe) {
@@ -46,7 +46,7 @@ class RecipeForm extends Component {
 
     uploadRecipe(formData)
       .then(
-        recipe => console.log("recipe upload successful! ", recipe),
+        rec => console.log("recipe upload successful! ", rec),
         Swal.fire({
           title: "Success!",
           text: "Your recipe has been successfully uploaded",
