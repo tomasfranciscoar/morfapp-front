@@ -14,10 +14,10 @@ class NavbarWithUser extends Component {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/recipe">Recipes</Link>
+              <Link to="/recipes">Recipes</Link>
             </li>
             <li>
-              <Link to="/recipe/new">Upload</Link>
+              <Link to="/recipes/new">Upload</Link>
             </li>
           </ul>
         </div>

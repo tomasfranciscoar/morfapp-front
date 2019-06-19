@@ -8,6 +8,7 @@ import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
 import RecipeForm from "./components/RecipeForm";
 import CustomRecipes from "./components/CustomRecipes";
+import CustomRecipeDetail from "./components/CustomRecipeDetail"
 
 class Router extends React.Component {
   constructor(props) {
@@ -16,6 +17,8 @@ class Router extends React.Component {
   }
 
   getTheUser = userObj => {
+    let user = JSON.parse(localStorage.getItem('USER'))
+    console.log('el user',user)
     this.setState({ loggedInUser: userObj });
   };
 
@@ -26,11 +29,11 @@ class Router extends React.Component {
         <Navbar isLogged={loggedInUser} />
         <Switch>
           <Route exact path="/" component={Home} />
-          {/* <Route
+          <Route
             exact
             path="/recipe/:id"
-            render={props => <RecipeDetail {...props} />}
-          /> */}
+            component={CustomRecipeDetail}
+          />
           <Route
             exact
             path="/signup"
@@ -41,8 +44,8 @@ class Router extends React.Component {
             path="/login"
             render={props => <Login {...props} getUser={this.getTheUser} />}
           />
-          <Route exact path="/recipe/new" component={RecipeForm}/>
-          <Route exact path="/recipe" component={CustomRecipes} />
+          <Route exact path="/recipes/new" component={RecipeForm}/>
+          <Route exact path="/recipes" component={CustomRecipes} />
         </Switch>
       </div>
     );

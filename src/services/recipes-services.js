@@ -13,24 +13,36 @@ export const searchRecipe = ingredient => {
 };
 
 export const uploadRecipe = recipe => {
-  return axios.post(`${local_url}/new`, recipe, {
-    headers: {
-      Authorization: localStorage.getItem('TOKEN'),
-      'Content-Type': 'multipart/form-data'
-    }
-  })
-  .then(res => res.data.recipe)
-  .catch(error => error)
+  return axios
+    .post(`${local_url}/new`, recipe, {
+      headers: {
+        Authorization: localStorage.getItem("TOKEN"),
+        "Content-Type": "multipart/form-data"
+      }
+    })
+    .then(res => res.data.recipe)
+    .catch(error => error);
 };
 
 export const getRecipes = () => {
-  return axios.get(`${local_url}`, {
-    headers: {
-      Authorization: localStorage.getItem('TOKEN')
-    }
-  })
-  .then(res => res.data.recipe)
-  .catch(err => console.log(err))
-}
+  return axios
+    .get(`${local_url}`, {
+      headers: {
+        Authorization: localStorage.getItem("TOKEN")
+      }
+    })
+    .then(res => res.data.recipe)
+    .catch(err => console.log(err));
+};
 
-
+export const getCustomRecipe = id => {
+  console.log('El idd',  id)
+  return axios
+    .get(`${local_url}/${id}`, {
+      headers: {
+        Authorization: localStorage.getItem("TOKEN")
+      }
+    })
+    .then(res => res.data.recipe)
+    .catch(error => error);
+};
