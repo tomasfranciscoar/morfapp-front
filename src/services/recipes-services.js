@@ -23,4 +23,14 @@ export const uploadRecipe = recipe => {
   .catch(error => error)
 };
 
+export const getRecipes = () => {
+  return axios.get(`${local_url}`, {
+    headers: {
+      Authorization: localStorage.getItem('TOKEN')
+    }
+  })
+  .then(res => res.data.recipe)
+  .catch(err => console.log(err))
+}
+
 

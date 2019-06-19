@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
 import RecipeForm from "./components/RecipeForm";
+import CustomRecipes from "./components/CustomRecipes";
 
 class Router extends React.Component {
   constructor(props) {
@@ -41,6 +42,7 @@ class Router extends React.Component {
             render={props => <Login {...props} getUser={this.getTheUser} />}
           />
           <Route exact path="/recipe/new" component={RecipeForm}/>
+          <Route exact path="/recipe" component={CustomRecipes} />
         </Switch>
       </div>
     );

@@ -13,7 +13,7 @@ class NavbarNoUser extends Component {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="#">Recipes</Link>
+              <Link to="/recipe">Recipes</Link>
             </li>
             <li>
               <Link to="/recipe/new">Upload</Link>
