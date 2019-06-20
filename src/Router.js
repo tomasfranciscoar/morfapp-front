@@ -18,7 +18,7 @@ class Router extends React.Component {
 
   getTheUser = userObj => {
     let user = JSON.parse(localStorage.getItem('USER'))
-    console.log('el user',user)
+    console.log('el user', user)
     this.setState({ loggedInUser: userObj });
   };
 

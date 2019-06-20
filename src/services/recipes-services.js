@@ -36,7 +36,6 @@ export const getRecipes = () => {
 };
 
 export const getCustomRecipe = id => {
-  console.log('El idd',  id)
   return axios
     .get(`${local_url}/${id}`, {
       headers: {
@@ -46,3 +45,25 @@ export const getCustomRecipe = id => {
     .then(res => res.data.recipe)
     .catch(error => error);
 };
+
+export const updateCustomRecipe = recipe => {
+  return axios
+    .patch(`${local_url}/${recipe._id}`, recipe, {
+      headers: {
+        Authorization: localStorage.getItem("TOKEN")
+      }
+    })
+    .then(res => res.data.recipe)
+    .catch(error => error);
+};
+
+export const deleteCustomRecipe = id => {
+  return axios
+    .delete(`${local_url}/${id}`, {
+      headers: {
+        Authorization: localStorage.getItem("TOKEN")
+      }
+    })
+    .then(res => res.data.recipe)
+    .catch(error => error);
+}

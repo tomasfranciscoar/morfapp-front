@@ -23,7 +23,7 @@ class CustomRecipeDetail extends Component {
           uk-grid="true"
         >
           <div class="uk-card-media-left uk-cover-container">
-            <img src={customRecipe.name} alt="" uk-cover="true" />
+            <img src={customRecipe.name} alt={customRecipe.name} uk-cover="true" />
             <canvas width="600" height="400" />
           </div>
           <div>
