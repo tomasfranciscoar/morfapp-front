@@ -1,11 +1,17 @@
 import React, { Component } from "react";
-import { getRecipes } from "../services/recipes-services";
+import { getRecipes, deleteCustomRecipe } from "../services/recipes-services";
 import {Link} from "react-router-dom";
+import Swal from "sweetalert2";
 
 class CustomRecipes extends Component {
   state = {
     customRecipes: []
   };
+
+  onDelete = id => {
+    deleteCustomRecipe(id)
+      .then( () => this.props.history.push("/"))
+  }
 
   componentWillMount() {
     getRecipes()
@@ -17,7 +23,7 @@ class CustomRecipes extends Component {
 
   render() {
     const { customRecipes } = this.state;
-    console.log(customRecipes)
+    console.log('las props: ', this.props)
     return (
       <div className="custom-recipes-container main-container">
         <div className="uk-child-width-1-3@m" uk-grid="true">
@@ -37,6 +43,7 @@ class CustomRecipes extends Component {
                   </p>
                 </div>
                 <button className="uk-button uk-primary"><span uk-icon="icon: star"></span> Fav</button>
+                <button onClick={() => this.onDelete(recipe._id)} className="uk-button uk-danger"><span uk-icon="icon: star"></span> Delete</button>
               </div>
             </div>
           ))}

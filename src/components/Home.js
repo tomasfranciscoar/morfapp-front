@@ -45,7 +45,6 @@ class Home extends Component {
   handleShowDetailedRecipe = (index) => {
     let { detailedRecipe, foundRecipes } = this.state;
     detailedRecipe = foundRecipes[index];
-    // foundRecipes = [];
     console.log('la detailedRecipe: ', detailedRecipe)
     this.setState({ foundRecipes, detailedRecipe });
   };

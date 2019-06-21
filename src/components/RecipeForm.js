@@ -32,16 +32,21 @@ class RecipeForm extends Component {
 
   onUpload = () => {
     let { recipe } = this.state;
+    // const user = JSON.parse(localStorage.getItem('USER'))
     const formData = new FormData()
     if(recipe.images) {
       for (let image of recipe.images) {
         formData.append('images', image)
       }
-      // delete recipe.images
     }
     
     for(let key in recipe) {
       formData.append(key, recipe[key])
+      console.log('la key: ', key, recipe[key])
+    }
+    
+    if(localStorage.length){
+      formData.append('author', JSON.parse(localStorage.getItem('USER'))._id)
     }
 
     uploadRecipe(formData)

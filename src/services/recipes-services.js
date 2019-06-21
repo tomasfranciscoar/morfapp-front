@@ -9,7 +9,7 @@ export const searchRecipe = ingredient => {
   return axios
     .get(`${api_url}q=${ingredient}&app_id=${app_id}&app_key=${app_key}`)
     .then(res => res.data.hits)
-    .catch(err => console.log(err));
+    .catch(error => console.log(error));
 };
 
 export const uploadRecipe = recipe => {
@@ -21,7 +21,7 @@ export const uploadRecipe = recipe => {
       }
     })
     .then(res => res.data.recipe)
-    .catch(error => error);
+    .catch(error => console.log(error));
 };
 
 export const getRecipes = () => {
@@ -32,7 +32,7 @@ export const getRecipes = () => {
       }
     })
     .then(res => res.data.recipe)
-    .catch(err => console.log(err));
+    .catch(error => console.log(error));
 };
 
 export const getCustomRecipe = id => {
@@ -43,7 +43,7 @@ export const getCustomRecipe = id => {
       }
     })
     .then(res => res.data.recipe)
-    .catch(error => error);
+    .catch(error => console.log(error));
 };
 
 export const updateCustomRecipe = recipe => {
@@ -54,7 +54,7 @@ export const updateCustomRecipe = recipe => {
       }
     })
     .then(res => res.data.recipe)
-    .catch(error => error);
+    .catch(error => console.log(error));
 };
 
 export const deleteCustomRecipe = id => {
@@ -65,5 +65,5 @@ export const deleteCustomRecipe = id => {
       }
     })
     .then(res => res.data.recipe)
-    .catch(error => error);
+    .catch(error => console.log(error));
 }
