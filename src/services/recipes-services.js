@@ -6,7 +6,7 @@ const app_key = "3999bfc1be3cf4b776b07f2db54fd15b";
 
 const isProduction = process.env.NODE_ENV === 'production'
 const local_url = isProduction
-  ? 'https://morfapp.herokuapp.com'
+  ? 'https://morfapp.herokuapp.com/recipe'
   : 'http://localhost:5000/recipe'
 
 export const searchRecipe = ingredient => {
