@@ -8,18 +8,22 @@ import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
 import RecipeForm from "./components/RecipeForm";
 import CustomRecipes from "./components/CustomRecipes";
-import CustomRecipeDetail from "./components/CustomRecipeDetail"
+import CustomRecipeDetail from "./components/CustomRecipeDetail";
+import Profile from "./components/Profile";
 
 class Router extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { loggedInUser: null };
+    this.state = { loggedInUser: null, customRecipes: [] };
   }
 
   getTheUser = userObj => {
-    let user = JSON.parse(localStorage.getItem('USER'))
-    console.log('el user', user)
     this.setState({ loggedInUser: userObj });
+  };
+
+  getTheCustomRecipes = customRec => {
+    this.setState({ customRecipes: customRec });
+    console.log('las recetas desde el router: ', this.state.customRecipes)
   };
 
   render() {
@@ -29,11 +33,7 @@ class Router extends React.Component {
         <Navbar isLogged={loggedInUser} />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route
-            exact
-            path="/recipe/:id"
-            component={CustomRecipeDetail}
-          />
+          <Route exact path="/recipe/:id" component={CustomRecipeDetail} />
           <Route
             exact
             path="/signup"
@@ -44,8 +44,9 @@ class Router extends React.Component {
             path="/login"
             render={props => <Login {...props} getUser={this.getTheUser} />}
           />
-          <Route exact path="/recipes/new" component={RecipeForm}/>
-          <Route exact path="/recipes" component={CustomRecipes} />
+          <Route exact path="/user/:id" component={Profile} />
+          <Route exact path="/recipes/new" component={RecipeForm} />
+          <Route exact path="/recipes" render={props => <CustomRecipes {...props} getRecipe={this.getTheCustomRecipes} />} />
         </Switch>
       </div>
     );

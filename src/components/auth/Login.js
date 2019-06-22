@@ -17,12 +17,10 @@ class Login extends Component {
       return this.setState({ error: "You must enter a username" });
     }
     this.onLogin();
-    console.log('local Storage desde Login.js: ', window.localStorage)
   };
 
   onLogin = () => {
     const { auth } = this.state;
-    console.log('props desde Login.js: ', this.props)
     login(auth)
       .then(({ token, user }) => {
         localStorage.setItem("TOKEN", token);

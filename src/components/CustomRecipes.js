@@ -22,8 +22,7 @@ class CustomRecipes extends Component {
   }
 
   render() {
-    const { customRecipes } = this.state;
-    console.log('las props: ', this.props)
+    const { customRecipes } = this.state; 
     return (
       <div className="custom-recipes-container main-container">
         <div className="uk-child-width-1-3@m" uk-grid="true">

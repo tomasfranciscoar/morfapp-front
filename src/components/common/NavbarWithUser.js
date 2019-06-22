@@ -6,6 +6,8 @@ import { withRouter } from "react-router-dom";
 class NavbarWithUser extends Component {
   render() {
     const { location } = this.props;
+    const name = JSON.parse(localStorage.getItem('USER')).name;
+    const id = JSON.parse(localStorage.getItem("USER"))._id;
     return (
       <nav className="uk-navbar-container" uk-navbar="true">
         <div className="uk-navbar-left">
@@ -39,7 +41,7 @@ class NavbarWithUser extends Component {
         <div className="uk-navbar-right">
           <ul className="uk-navbar-nav">
             <li>
-              <Link to="#">Profile</Link>
+              <Link to={`/user/${id}`}>{name}</Link>
             </li>
             <li onClick={logout}>
               <Link to="#">Logout</Link>

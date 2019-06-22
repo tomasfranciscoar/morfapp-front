@@ -1,9 +1,13 @@
 import axios from "axios";
 
 const api_url = "https://api.edamam.com/search?";
-const local_url = "http://localhost:5000/recipe";
 const app_id = "97cb8be0";
 const app_key = "3999bfc1be3cf4b776b07f2db54fd15b";
+
+const isProduction = process.env.NODE_ENV === 'production'
+const local_url = isProduction
+  ? 'https://morfapp.herokuapp.com'
+  : 'http://localhost:5000/recipe'
 
 export const searchRecipe = ingredient => {
   return axios
