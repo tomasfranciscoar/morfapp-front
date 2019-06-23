@@ -51,14 +51,16 @@ class RecipeForm extends Component {
 
     uploadRecipe(formData)
       .then(
-        rec => console.log("recipe upload successful! ", rec),
+        rec => {
+          console.log("recipe upload successful! ", rec);
         Swal.fire({
           title: "Success!",
           text: "Your recipe has been successfully uploaded",
           type: "success",
           confirmButtonText: "Cool"
-        }),
-        this.props.history.push("/")
+        });
+        this.props.history.push(`/recipe/${rec._id}`)
+        }
       )
       .catch(error => console.log(error));
   };

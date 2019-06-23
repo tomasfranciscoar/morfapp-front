@@ -10,6 +10,7 @@ import RecipeForm from "./components/RecipeForm";
 import CustomRecipes from "./components/CustomRecipes";
 import CustomRecipeDetail from "./components/CustomRecipeDetail";
 import Profile from "./components/Profile";
+import ProfileEdit from "./components/ProfileEdit"
 
 class Router extends React.Component {
   constructor(props) {
@@ -45,6 +46,7 @@ class Router extends React.Component {
             render={props => <Login {...props} getUser={this.getTheUser} />}
           />
           <Route exact path="/user/:id" component={Profile} />
+          <Route exact path="/user/edit/:id" render={props => <ProfileEdit {...props} />} />
           <Route exact path="/recipes/new" component={RecipeForm} />
           <Route exact path="/recipes" render={props => <CustomRecipes {...props} getRecipe={this.getTheCustomRecipes} />} />
         </Switch>

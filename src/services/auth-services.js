@@ -29,3 +29,13 @@ export const logout = () => {
   window.location.reload();
   window.location.href = logoutRedirect;
 };
+
+export const editProfile = profile => {
+  return axios.patch(`${base_url}/profile/${profile._id}`, profile, {
+    headers: {
+      Authorization: localStorage.getItem("TOKEN")
+    }
+  })
+  .then(res => res.data.profile)
+  .catch(error => console.log(error))
+}
