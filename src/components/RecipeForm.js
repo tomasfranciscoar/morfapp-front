@@ -59,11 +59,14 @@ class RecipeForm extends Component {
         this.props.history.push(`/recipe/${rec._id}`)
         }
       )
-      .catch(error => console.log(error));
+      .catch(error => {
+        return this.setState({ error: error.message });
+      });
   };
 
   render() {
     let { name, ingredients } = this.state.recipe;
+    const { error } = this.state;
     return (
       <div className="custom-form main-container">
         <form onSubmit={this.handleFormSubmit} className="uk-form-stacked">
@@ -111,6 +114,11 @@ class RecipeForm extends Component {
               multiple
             />
           </p>
+
+          {error && <div className="uk-alert-danger" uk-alert="true">
+            <p>{error}</p>
+          </div>}
+
           <p>
             <input type="submit" className="uk-button uk-button-primary" />
           </p>

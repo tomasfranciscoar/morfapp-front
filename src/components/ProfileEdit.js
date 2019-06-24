@@ -9,7 +9,7 @@ class ProfileEdit extends Component {
       lastname: JSON.parse(localStorage.getItem("USER")).lastname,
       username: JSON.parse(localStorage.getItem("USER")).username,
       id: JSON.parse(localStorage.getItem("USER"))._id,
-      profilePicture: JSON.parse(localStorage.getItem("USER")).profilePicture
+      profilePicture: ""
     }
   };
 
@@ -27,38 +27,43 @@ class ProfileEdit extends Component {
     }
     user[field] = e.target.value;
     this.setState({ user });
-    console.log(user)
+    console.log(user);
   };
 
   onEdit = () => {
     const { user } = this.state;
     const formData = new FormData();
     if (user.profilePicture) {
-      for (let image of user.profilePicture){
-        formData.append("profilePicture", image)
+      for (let image of user.profilePicture) {
+        formData.append("profilePicture", image);
       }
     }
 
     for (let key in user) {
-      formData.append(key, user[key])
+      formData.append(key, user[key]);
+    }
+
+    if (user.profilePicture === "") {
+      return this.setState({ error: "You must include a profile picture" });
     }
 
     editProfile(formData)
       .then(profile => {
-        this.setState({user: profile})
+        this.setState({ user: profile });
         Swal.fire({
           title: "Success!",
           text: "Your profile has been successfully updated",
           type: "success",
           confirmButtonText: "Cool"
-        })
-        this.props.history.push(`/user/${profile.id}`)
+        });
+        this.props.history.push(`/user/${profile.id}`);
       })
-      .catch(error => console.log("el error desde profileEdit: ", error))
+      .catch(error => console.log("el error desde profileEdit: ", error));
   };
 
   render() {
     const { name, lastname, username } = this.state.user;
+    const { error } = this.state;
     return (
       <div className="profile-edit-container main-container">
         <form onSubmit={this.handleFormSubmit} className="uk-form-stacked">
@@ -100,6 +105,12 @@ class ProfileEdit extends Component {
               onChange={e => this.handleChange(e)}
             />
           </p>
+
+          {error && (
+            <div className="uk-alert-danger" uk-alert="true">
+              <p>{error}</p>
+            </div>
+          )}
 
           <p>
             <input

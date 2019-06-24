@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { getProfile } from "../services/auth-services"
+import { getMyRecipes } from "../services/recipes-services";
 
 class Profile extends Component {
 
   state = {
-    profile: {}
+    profile: {},
+    myRecipes: []
   }
 
   componentDidMount(){
@@ -13,11 +15,17 @@ class Profile extends Component {
       .then(user => {
         this.setState({profile: user})
       })
+      .catch(error => error);
+    getMyRecipes()
+      .then(recipes => {
+        this.setState({myRecipes: recipes.reverse()})
+      })
       .catch(error => error)
   }
 
   render() {
     const user = this.state.profile;
+    const { myRecipes } = this.state;
     return (
       <div className="profile-container main-container">
         <div>Welcome, {user.name}!</div>
@@ -35,7 +43,7 @@ class Profile extends Component {
           <div>
             <h3>My Recipes</h3>
             <ul>
-              <li></li>
+              {myRecipes.map((recipe, i) => <li key={i}>{recipe.name}</li>)}
             </ul>
           </div>
           <div>

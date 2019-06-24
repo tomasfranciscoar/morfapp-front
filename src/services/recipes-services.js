@@ -4,10 +4,10 @@ const api_url = "https://api.edamam.com/search?";
 const app_id = "97cb8be0";
 const app_key = "3999bfc1be3cf4b776b07f2db54fd15b";
 
-const isProduction = process.env.NODE_ENV === 'production'
+const isProduction = process.env.NODE_ENV === "production";
 const local_url = isProduction
-  ? 'https://morfapp.herokuapp.com/recipe'
-  : 'http://localhost:5000/recipe'
+  ? "https://morfapp.herokuapp.com/recipe"
+  : "http://localhost:5000/recipe";
 
 export const searchRecipe = ingredient => {
   return axios
@@ -70,4 +70,14 @@ export const deleteCustomRecipe = id => {
     })
     .then(res => res.data.recipe)
     .catch(error => console.log(error));
-}
+};
+
+export const getMyRecipes = () => {
+  return axios.get(
+    `${local_url}/myrecipes/${
+      JSON.parse(localStorage.getItem("USER"))._id
+    }`
+  )
+  .then(res => res.data.recipes)
+  .catch(error => console.log(error));
+};
