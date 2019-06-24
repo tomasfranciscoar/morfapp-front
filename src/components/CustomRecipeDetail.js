@@ -18,7 +18,7 @@ class CustomRecipeDetail extends Component {
     return (
       <div className="custom-recipe-detail-container main-container">
         <div
-          class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin"
+          className="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin"
           uk-grid="true"
         >
           <div className="uk-card-media-left uk-cover-container">

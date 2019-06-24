@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import {editProfile} from "../services/auth-services";
+import { editProfile } from "../services/auth-services";
+import Swal from "sweetalert2";
 
 class ProfileEdit extends Component {
   state = {
@@ -7,31 +8,60 @@ class ProfileEdit extends Component {
       name: JSON.parse(localStorage.getItem("USER")).name,
       lastname: JSON.parse(localStorage.getItem("USER")).lastname,
       username: JSON.parse(localStorage.getItem("USER")).username,
-      id: JSON.parse(localStorage.getItem("USER"))._id
+      id: JSON.parse(localStorage.getItem("USER"))._id,
+      profilePicture: JSON.parse(localStorage.getItem("USER")).profilePicture
     }
+  };
+
+  handleFormSubmit = e => {
+    e.preventDefault();
+    this.onEdit();
   };
 
   handleChange = e => {
     const { user } = this.state;
     let field = e.target.name;
+    if (e.target.files) {
+      user.profilePicture = e.target.files;
+      return this.setState({ user });
+    }
     user[field] = e.target.value;
-    this.setState({ user })
+    this.setState({ user });
+    console.log(user)
   };
 
   onEdit = () => {
-    const {user} = this.state;
-    editProfile(user)
-    // .then(user => {
-    //   this.props.history.push(`/user/${user.id}`)
-    // })
-  }
+    const { user } = this.state;
+    const formData = new FormData();
+    if (user.profilePicture) {
+      for (let image of user.profilePicture){
+        formData.append("profilePicture", image)
+      }
+    }
+
+    for (let key in user) {
+      formData.append(key, user[key])
+    }
+
+    editProfile(formData)
+      .then(profile => {
+        this.setState({user: profile})
+        Swal.fire({
+          title: "Success!",
+          text: "Your profile has been successfully updated, you must logout/signin again to see the changes",
+          type: "success",
+          confirmButtonText: "Cool"
+        })
+        this.props.history.push(`/user/${profile.id}`)
+      })
+      .catch(error => console.log("el error desde profileEdit: ", error))
+  };
 
   render() {
-    const { name, lastname, username } = this.state.user;
-    console.log(this.state);
+    const { name, lastname, username, profilePicture } = this.state.user;
     return (
       <div className="profile-edit-container main-container">
-        <form className="uk-form-stacked">
+        <form onSubmit={this.handleFormSubmit} className="uk-form-stacked">
           <p>
             <input
               className="uk-input uk-form-width-medium"

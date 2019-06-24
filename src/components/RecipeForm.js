@@ -21,8 +21,7 @@ class RecipeForm extends Component {
       return this.setState({ recipe });
     }
     recipe[field] = e.target.value;
-    this.setState({ recipe });
-    console.log(recipe)
+    this.setState({ recipe })
   };
 
   handleFormSubmit = e => {
@@ -32,7 +31,6 @@ class RecipeForm extends Component {
 
   onUpload = () => {
     let { recipe } = this.state;
-    // const user = JSON.parse(localStorage.getItem('USER'))
     const formData = new FormData()
     if(recipe.images) {
       for (let image of recipe.images) {
@@ -42,7 +40,6 @@ class RecipeForm extends Component {
     
     for(let key in recipe) {
       formData.append(key, recipe[key])
-      console.log('la key: ', key, recipe[key])
     }
     
     if(localStorage.length){
