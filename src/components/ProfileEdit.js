@@ -48,7 +48,7 @@ class ProfileEdit extends Component {
         this.setState({user: profile})
         Swal.fire({
           title: "Success!",
-          text: "Your profile has been successfully updated, you must logout/signin again to see the changes",
+          text: "Your profile has been successfully updated",
           type: "success",
           confirmButtonText: "Cool"
         })

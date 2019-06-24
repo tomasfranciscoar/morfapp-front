@@ -41,7 +41,8 @@ class Login extends Component {
   }
 
   render() {
-    const {username, password, error} = this.state.auth;
+    const {username, password } = this.state.auth;
+    const { error } = this.state;
     return (
       <div className="custom-form main-container">
         <h2>Log In</h2>

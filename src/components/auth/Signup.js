@@ -45,6 +45,7 @@ class Signup extends Component {
 
   render() {
     const {name, lastname, email, username, password} = this.state.auth
+    const { error } = this.state;
     return (
       <div className="custom-form main-container">
         <h2>Sign Up</h2>
@@ -103,6 +104,13 @@ class Signup extends Component {
               onChange={e => this.handleChange(e)}
             />
           </p>
+          <p>(Password must be at least 8 characters long.)</p>
+          
+          {error && (
+                <div className="uk-alert-danger" uk-alert="true">
+                    <p>{error}</p>
+                </div>
+            )}
 
           <p>
             <input
