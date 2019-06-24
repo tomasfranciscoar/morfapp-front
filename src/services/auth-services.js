@@ -49,3 +49,9 @@ export const editProfile = profile => {
     .then(res => res.data.profile)
     .catch(error => error);
 };
+
+export const getProfile = () => {
+  return axios.get(`${base_url}/profile/${JSON.parse(localStorage.getItem("USER"))._id}`)
+    .then(res => res.data.profile)
+    .catch(error => error)
+}

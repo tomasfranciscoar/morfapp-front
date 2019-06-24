@@ -58,7 +58,7 @@ class ProfileEdit extends Component {
   };
 
   render() {
-    const { name, lastname, username, profilePicture } = this.state.user;
+    const { name, lastname, username } = this.state.user;
     return (
       <div className="profile-edit-container main-container">
         <form onSubmit={this.handleFormSubmit} className="uk-form-stacked">

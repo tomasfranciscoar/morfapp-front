@@ -1,9 +1,23 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { getProfile } from "../services/auth-services"
 
 class Profile extends Component {
+
+  state = {
+    profile: {}
+  }
+
+  componentDidMount(){
+    getProfile()
+      .then(user => {
+        this.setState({profile: user})
+      })
+      .catch(error => error)
+  }
+
   render() {
-    const user = JSON.parse(localStorage.getItem("USER"));
+    const user = this.state.profile;
     return (
       <div className="profile-container main-container">
         <div>Welcome, {user.name}!</div>

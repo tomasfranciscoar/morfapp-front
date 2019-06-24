@@ -2,11 +2,25 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { logout } from "../../services/auth-services";
 import { withRouter } from "react-router-dom";
+import { getProfile } from "../../services/auth-services";
 
 class NavbarWithUser extends Component {
+
+  state = {
+    profile: {}
+  }
+
+  componentDidMount(){
+    getProfile()
+      .then(user => {
+        this.setState({profile: user})
+      })
+      .catch(error => error)
+  }
+
   render() {
     const { location } = this.props;
-    const name = JSON.parse(localStorage.getItem('USER')).name;
+    const { profile } = this.state;
     const id = JSON.parse(localStorage.getItem("USER"))._id;
     return (
       <nav className="uk-navbar-container" uk-navbar="true">
@@ -41,7 +55,7 @@ class NavbarWithUser extends Component {
         <div className="uk-navbar-right">
           <ul className="uk-navbar-nav">
             <li>
-              <Link to={`/user/${id}`}>{name}</Link>
+              <Link to={`/user/${id}`}>{profile.name}</Link>
             </li>
             <li onClick={logout}>
               <Link to="#">Logout</Link>
