@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import {
   getCustomRecipe,
   likeCustomRecipe,
-  postComment
+  postComment,
+  getComments
 } from "../services/recipes-services";
 import Swal from "sweetalert2";
 
@@ -11,14 +12,22 @@ class CustomRecipeDetail extends Component {
     customRecipe: {
       comment: ""
     },
+    comments: [],
+    commented: true,
     likes: 0
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const { id } = this.props.match.params;
+
     getCustomRecipe(id)
       .then(recipe => this.setState({ customRecipe: recipe }))
       .catch(err => console.log(err));
+
+    getComments(id).then(comments => {
+      this.setState({ comments: comments });
+      console.log(comments);
+    });
   }
 
   onLike = id => {
@@ -43,14 +52,20 @@ class CustomRecipeDetail extends Component {
   };
 
   handlePostComment = () => {
-    const { customRecipe } = this.state;
-    postComment(customRecipe.comment, JSON.parse(localStorage.getItem("USER"))._id)
+    const { comment, _id: recipe } = this.state.customRecipe;
+    const { commented } = this.state;
+    const user = JSON.parse(localStorage.getItem("USER"))._id;
+    postComment(comment, user, recipe)
       .then(() => {
         Swal.fire({
           title: "Success!",
           text: "Your comment has been successfully posted",
           type: "success",
           confirmButtonText: "Cool"
+        });
+        getComments(this.props.match.params.id).then(comments => {
+          this.setState({ comments: comments });
+          console.log(comments);
         });
       })
       .catch(error => {
@@ -59,7 +74,7 @@ class CustomRecipeDetail extends Component {
   };
 
   render() {
-    const { customRecipe, likes } = this.state;
+    const { customRecipe, likes, comments } = this.state;
     return (
       <div className="custom-recipe-detail-container main-container">
         <div
@@ -92,6 +107,11 @@ class CustomRecipeDetail extends Component {
             </button>
           </div>
         </div>
+        <h4>Comments</h4>
+        {comments.map((comment, i) => (
+          <p key={i}>{comment.comment}</p>
+        ))}
+
         <div className="comment">
           <form onSubmit={this.handleSubmit}>
             <input

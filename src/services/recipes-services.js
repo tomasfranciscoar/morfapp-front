@@ -73,17 +73,24 @@ export const deleteCustomRecipe = id => {
 };
 
 export const getMyRecipes = () => {
-  return axios.get(
-    `${local_url}/myrecipes/${
-      JSON.parse(localStorage.getItem("USER"))._id
-    }`
-  )
-  .then(res => res.data.recipes)
-  .catch(error => console.log(error));
+  return axios
+    .get(
+      `${local_url}/myrecipes/${JSON.parse(localStorage.getItem("USER"))._id}`
+    )
+    .then(res => res.data.recipes)
+    .catch(error => console.log(error));
 };
 
-export const postComment = (comment, author) => {
-  return axios.post(`${local_url}/comment`, {comment, author})
-  .then(res => res.data.comment)
-  .catch(error => console.log(error));
-}
+export const postComment = (comment, author, recipe) => {
+  return axios
+    .post(`${local_url}/comment`, { comment, author, recipe })
+    .then(res => res.data.comment)
+    .catch(error => console.log(error));
+};
+
+export const getComments = id => {
+  return axios
+    .get(`${local_url}/comment/${id}`)
+    .then(res => res.data.comments)
+    .catch(error => console.log(error));
+};
