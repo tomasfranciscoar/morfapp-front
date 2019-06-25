@@ -81,3 +81,9 @@ export const getMyRecipes = () => {
   .then(res => res.data.recipes)
   .catch(error => console.log(error));
 };
+
+export const postComment = (comment, author) => {
+  return axios.post(`${local_url}/comment`, {comment, author})
+  .then(res => res.data.comment)
+  .catch(error => console.log(error));
+}
