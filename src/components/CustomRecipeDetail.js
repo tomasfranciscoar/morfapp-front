@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { getCustomRecipe } from "../services/recipes-services";
+import { getCustomRecipe, likeCustomRecipe } from "../services/recipes-services";
 
 class CustomRecipeDetail extends Component {
   state = {
-    customRecipe: {}
+    customRecipe: {},
+    likes: 0
   };
 
   componentWillMount() {
@@ -13,8 +14,16 @@ class CustomRecipeDetail extends Component {
       .catch(err => console.log(err));
   }
 
+  onLike = id => {
+    let { likes } = this.state;
+    let newLikes = likes + 1;
+    likeCustomRecipe(id)
+      .then(() => this.setState({ likes: newLikes }))
+      .catch(error => console.log(error));
+  };
+
   render() {
-    const { customRecipe } = this.state;
+    const { customRecipe, likes } = this.state;
     return (
       <div className="custom-recipe-detail-container main-container">
         <div
@@ -33,6 +42,14 @@ class CustomRecipeDetail extends Component {
                 eiusmod tempor incididunt.
               </p>
             </div>
+            <button
+                  name="likes"
+                  value={likes}
+                  onClick={() => this.onLike(customRecipe)}
+                  className="uk-button uk-button-default"
+                >
+                  Likes: {likes}
+                </button>
           </div>
         </div>
       </div>

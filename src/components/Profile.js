@@ -39,7 +39,7 @@ class Profile extends Component {
           <button className="uk-button uk-button-secondary">Edit Profile</button>
           </Link>
         </div>
-        <div>
+        <div className="profile-lists-container">
           <div>
             <h3>My Recipes</h3>
             <ul>

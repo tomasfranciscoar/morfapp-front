@@ -111,7 +111,6 @@ class RecipeForm extends Component {
               type="file"
               name="images"
               onChange={this.handleChange}
-              multiple
             />
           </p>
 

@@ -50,7 +50,7 @@ export const getCustomRecipe = id => {
     .catch(error => console.log(error));
 };
 
-export const updateCustomRecipe = recipe => {
+export const likeCustomRecipe = recipe => {
   return axios
     .patch(`${local_url}/${recipe._id}`, recipe, {
       headers: {

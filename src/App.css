@@ -68,3 +68,13 @@
 .health-label {
   margin: 5px;
 }
+
+.profile-lists-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.profile-lists-container li {
+  list-style-type: none;
+  text-align: left;
+}
