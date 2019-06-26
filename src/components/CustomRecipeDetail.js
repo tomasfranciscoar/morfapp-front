@@ -5,7 +5,6 @@ import {
   postComment,
   getComments
 } from "../services/recipes-services";
-import Swal from "sweetalert2";
 
 class CustomRecipeDetail extends Component {
   state = {
@@ -13,8 +12,7 @@ class CustomRecipeDetail extends Component {
       comment: ""
     },
     comments: [],
-    commented: true,
-    likes: 0
+    stateLikes: 0
   };
 
   componentDidMount() {
@@ -30,11 +28,12 @@ class CustomRecipeDetail extends Component {
     });
   }
 
-  onLike = id => {
-    let { likes } = this.state;
-    let newLikes = likes + 1;
-    likeCustomRecipe(id)
-      .then(() => this.setState({ likes: newLikes }))
+  onLike = () => {
+    const { id } = this.props.match.params;
+    let { stateLikes } = this.state;
+    let likes = stateLikes + 1;
+    likeCustomRecipe(likes, id)
+      .then(() => this.setState({ stateLikes: likes }))
       .catch(error => console.log(error));
   };
 
@@ -43,7 +42,6 @@ class CustomRecipeDetail extends Component {
     let field = e.target.name;
     customRecipe[field] = e.target.value;
     this.setState({ customRecipe });
-    console.log(customRecipe);
   };
 
   handleSubmit = e => {
@@ -53,19 +51,11 @@ class CustomRecipeDetail extends Component {
 
   handlePostComment = () => {
     const { comment, _id: recipe } = this.state.customRecipe;
-    const { commented } = this.state;
     const user = JSON.parse(localStorage.getItem("USER"))._id;
     postComment(comment, user, recipe)
       .then(() => {
-        Swal.fire({
-          title: "Success!",
-          text: "Your comment has been successfully posted",
-          type: "success",
-          confirmButtonText: "Cool"
-        });
-        getComments(this.props.match.params.id).then(comments => {
+          getComments(this.props.match.params.id).then(comments => {
           this.setState({ comments: comments });
-          console.log(comments);
         });
       })
       .catch(error => {
@@ -74,7 +64,7 @@ class CustomRecipeDetail extends Component {
   };
 
   render() {
-    const { customRecipe, likes, comments } = this.state;
+    const { customRecipe, stateLikes, comments } = this.state;
     return (
       <div className="custom-recipe-detail-container main-container">
         <div
@@ -98,18 +88,21 @@ class CustomRecipeDetail extends Component {
               </p>
             </div>
             <button
-              name="likes"
-              value={likes}
-              onClick={() => this.onLike(customRecipe)}
+              name="stateLikes"
+              value={stateLikes}
+              onClick={this.onLike}
               className="uk-button uk-button-default"
             >
-              Likes: {likes}
+              Likes: {stateLikes}
             </button>
           </div>
         </div>
-        <h4>Comments</h4>
+        {comments.length ? <h4>COMMENTS</h4> : null}
         {comments.map((comment, i) => (
-          <p key={i}>{comment.comment}</p>
+          <div key={i}>
+            <h5>User: {comment.author.username}</h5>
+            <p>{comment.comment}</p>
+          </div>
         ))}
 
         <div className="comment">

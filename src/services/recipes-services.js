@@ -50,13 +50,9 @@ export const getCustomRecipe = id => {
     .catch(error => console.log(error));
 };
 
-export const likeCustomRecipe = recipe => {
+export const likeCustomRecipe = (likes, id) => {
   return axios
-    .patch(`${local_url}/${recipe._id}`, recipe, {
-      headers: {
-        Authorization: localStorage.getItem("TOKEN")
-      }
-    })
+    .patch(`${local_url}/${id}`, likes)
     .then(res => res.data.recipe)
     .catch(error => console.log(error));
 };

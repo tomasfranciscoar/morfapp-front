@@ -1,26 +1,25 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { getProfile } from "../services/auth-services"
+import { getProfile } from "../services/auth-services";
 import { getMyRecipes } from "../services/recipes-services";
 
 class Profile extends Component {
-
   state = {
     profile: {},
     myRecipes: []
-  }
+  };
 
-  componentDidMount(){
+  componentDidMount() {
     getProfile()
       .then(user => {
-        this.setState({profile: user})
+        this.setState({ profile: user });
       })
       .catch(error => error);
     getMyRecipes()
       .then(recipes => {
-        this.setState({myRecipes: recipes.reverse()})
+        this.setState({ myRecipes: recipes.reverse() });
       })
-      .catch(error => error)
+      .catch(error => error);
   }
 
   render() {
@@ -36,20 +35,26 @@ class Profile extends Component {
         />
         <div>
           <Link to={`/user/edit/${user._id}`}>
-          <button className="uk-button uk-button-secondary">Edit Profile</button>
+            <button className="uk-button uk-button-secondary">
+              Edit Profile
+            </button>
           </Link>
         </div>
         <div className="profile-lists-container">
           <div>
             <h3>My Recipes</h3>
             <ul>
-              {myRecipes.map((recipe, i) => <li key={i}>{recipe.name}</li>)}
+              {myRecipes.map((recipe, i) => (
+                <Link key={i} to={`/recipe/${recipe._id}`}>
+                  <li>{recipe.name}</li>
+                </Link>
+              ))}
             </ul>
           </div>
           <div>
             <h3>Favourites</h3>
             <ul>
-              <li></li>
+              <li />
             </ul>
           </div>
         </div>

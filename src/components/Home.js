@@ -62,7 +62,7 @@ class Home extends Component {
           <form onSubmit={this.handleSubmitSearch}>
             <input
               className="uk-input uk-form-width-large"
-              placeholder="Type your available ingredients..."
+              placeholder="Type your available ingredients!"
               onChange={this.handleChange}
               type="text"
               name="ingredient"
