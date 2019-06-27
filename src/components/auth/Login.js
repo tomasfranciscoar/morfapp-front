@@ -45,7 +45,7 @@ class Login extends Component {
     const { error } = this.state;
     return (
       <div className="custom-form main-container">
-        <h2>Log In</h2>
+        <h5>LOG IN</h5>
         <form className="uk-form-stacked" onSubmit={this.handleFormSubmit}>
           <p>
             <input

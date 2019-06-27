@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import {
   getCustomRecipe,
+  deleteCustomRecipe,
   postComment,
   getComments,
   getFavs
 } from "../services/recipes-services";
 import { favCustomRecipe } from "../services/auth-services"
+import Swal from "sweetalert2";
 
 class CustomRecipeDetail extends Component {
   state = {
@@ -33,6 +35,20 @@ class CustomRecipeDetail extends Component {
       .then(favs => this.setState({favs: favs}))
       .catch(err => console.log(err));
   }
+
+  onDelete = () => {
+    const { id } = this.props.match.params;
+    deleteCustomRecipe(id)
+      .then(() => {
+      Swal.fire({
+        title: "Success!",
+        text: "Your recipe has been successfully deleted",
+        type: "error",
+        confirmButtonText: "Cool"
+      });
+      this.props.history.push("/recipes");
+    });
+  };
 
   onFav = e => {
     const { id } = this.props.match.params;
@@ -71,7 +87,7 @@ class CustomRecipeDetail extends Component {
   render() {
     const { customRecipe, userId, comments, favs } = this.state;
     return (
-      <div className="custom-recipe-detail-container main-container">
+      <div className="custom-recipe-detail-container main-container custom-form">
         <div
           className="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin"
           uk-grid="true"
@@ -92,14 +108,19 @@ class CustomRecipeDetail extends Component {
                 eiusmod tempor incididunt.
               </p>
             </div>
-            <button
-              name="favs"
-              value={userId}
-              onClick={this.onFav}
-              className="uk-button uk-button-default"
-            >
-              FAVS: {favs.users ? favs.users.length : 0}
-            </button>
+            <button 
+            name="favs"
+            value={userId}
+            onClick={this.onFav}
+            className="uk-button uk-primary">
+                  <span uk-icon="icon: star" /> Favs: {favs.users ? favs.users.length : 0}
+                </button>
+                <button
+                  onClick={this.onDelete}
+                  className="uk-button uk-danger"
+                >
+                  <span uk-icon="icon: trash" /> Delete
+                </button>
           </div>
         </div>
         {comments.length ? <h4>COMMENTS</h4> : null}

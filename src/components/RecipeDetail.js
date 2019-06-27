@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import { likeCustomRecipe } from "../services/recipes-services";
 
 class RecipeDetail extends Component{
   render(){

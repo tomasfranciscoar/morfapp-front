@@ -78,3 +78,8 @@
   list-style-type: none;
   text-align: left;
 }
+
+.custom-recipes-container {
+  width: 90%;
+  padding: 5%;
+}

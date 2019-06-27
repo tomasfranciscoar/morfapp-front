@@ -70,6 +70,7 @@ class RecipeForm extends Component {
     
     return (
       <div className="custom-form main-container">
+        <h5>UPLOAD RECIPE</h5>
         <form onSubmit={this.handleFormSubmit} className="uk-form-stacked">
           <p>
             <input
