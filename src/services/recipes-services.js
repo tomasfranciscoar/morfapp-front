@@ -50,13 +50,6 @@ export const getCustomRecipe = id => {
     .catch(error => console.log(error));
 };
 
-export const likeCustomRecipe = (likes, id) => {
-  return axios
-    .patch(`${local_url}/${id}`, likes)
-    .then(res => res.data.recipe)
-    .catch(error => console.log(error));
-};
-
 export const deleteCustomRecipe = id => {
   return axios
     .delete(`${local_url}/${id}`, {
@@ -90,3 +83,9 @@ export const getComments = id => {
     .then(res => res.data.comments)
     .catch(error => console.log(error));
 };
+
+export const getFavs = id => {
+  return axios.get(`${local_url}/favs/${id}`)
+    .then(res => res.data)
+    .catch(error => console.log(error));
+}

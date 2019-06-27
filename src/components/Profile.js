@@ -6,13 +6,15 @@ import { getMyRecipes } from "../services/recipes-services";
 class Profile extends Component {
   state = {
     profile: {},
-    myRecipes: []
+    myRecipes: [],
+    myFavs: []
   };
 
   componentDidMount() {
     getProfile()
       .then(user => {
-        this.setState({ profile: user });
+        const favourites = user.favs;
+        this.setState({ profile: user, myFavs: favourites });
       })
       .catch(error => error);
     getMyRecipes()
@@ -24,7 +26,8 @@ class Profile extends Component {
 
   render() {
     const user = this.state.profile;
-    const { myRecipes } = this.state;
+    const { myRecipes, myFavs } = this.state;
+    console.log(myFavs);
     return (
       <div className="profile-container main-container">
         <div>Welcome, {user.name}!</div>
@@ -52,9 +55,13 @@ class Profile extends Component {
             </ul>
           </div>
           <div>
-            <h3>Favourites</h3>
+            <h3>My Favs</h3>
             <ul>
-              <li />
+              {myFavs.map((fav, i) => (
+                <Link key={i} to={`/recipe/${fav._id}`}>
+                  <li>{fav.name}</li>
+                </Link>
+              ))}
             </ul>
           </div>
         </div>

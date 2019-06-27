@@ -67,6 +67,7 @@ class RecipeForm extends Component {
   render() {
     let { name, ingredients } = this.state.recipe;
     const { error } = this.state;
+    
     return (
       <div className="custom-form main-container">
         <form onSubmit={this.handleFormSubmit} className="uk-form-stacked">

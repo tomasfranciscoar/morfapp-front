@@ -59,3 +59,11 @@ export const getProfile = () => {
     .then(res => res.data.profile)
     .catch(error => error)
 }
+
+export const favCustomRecipe = (favs, id) => {
+  return axios.patch(
+    `${base_url}/profile/favs/${id}`, {favs} 
+  )
+  .then(res => res.data.profile)
+  .catch(error => console.log(error));
+};

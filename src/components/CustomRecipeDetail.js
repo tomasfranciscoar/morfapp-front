@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import {
   getCustomRecipe,
-  likeCustomRecipe,
   postComment,
-  getComments
+  getComments,
+  getFavs
 } from "../services/recipes-services";
+import { favCustomRecipe } from "../services/auth-services"
 
 class CustomRecipeDetail extends Component {
   state = {
@@ -12,7 +13,9 @@ class CustomRecipeDetail extends Component {
       comment: ""
     },
     comments: [],
-    stateLikes: 0
+    favs: [],
+    userFaved: {}, 
+    userId: JSON.parse(localStorage.getItem("USER"))._id
   };
 
   componentDidMount() {
@@ -22,19 +25,21 @@ class CustomRecipeDetail extends Component {
       .then(recipe => this.setState({ customRecipe: recipe }))
       .catch(err => console.log(err));
 
-    getComments(id).then(comments => {
-      this.setState({ comments: comments });
-      console.log(comments);
-    });
+    getComments(id)
+      .then(comments => this.setState({ comments: comments }))
+      .catch(err => console.log(err));
+      
+    getFavs(id)
+      .then(favs => this.setState({favs: favs}))
+      .catch(err => console.log(err));
   }
 
-  onLike = () => {
+  onFav = e => {
     const { id } = this.props.match.params;
-    let { stateLikes } = this.state;
-    let likes = stateLikes + 1;
-    likeCustomRecipe(likes, id)
-      .then(() => this.setState({ stateLikes: likes }))
-      .catch(error => console.log(error));
+    const favs = e.target.value
+    favCustomRecipe(favs, id)
+    .then(user => console.log(user))
+    .catch(err => console.log(err))
   };
 
   handleChange = e => {
@@ -64,7 +69,7 @@ class CustomRecipeDetail extends Component {
   };
 
   render() {
-    const { customRecipe, stateLikes, comments } = this.state;
+    const { customRecipe, userId, comments, favs } = this.state;
     return (
       <div className="custom-recipe-detail-container main-container">
         <div
@@ -88,12 +93,12 @@ class CustomRecipeDetail extends Component {
               </p>
             </div>
             <button
-              name="stateLikes"
-              value={stateLikes}
-              onClick={this.onLike}
+              name="favs"
+              value={userId}
+              onClick={this.onFav}
               className="uk-button uk-button-default"
             >
-              Likes: {stateLikes}
+              FAVS: {favs.users ? favs.users.length : 0}
             </button>
           </div>
         </div>
