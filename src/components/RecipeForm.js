@@ -69,7 +69,7 @@ class RecipeForm extends Component {
     const { error } = this.state;
     
     return (
-      <div className="custom-form main-container">
+      <div className="custom-form main-container small-site">
         <h5>UPLOAD RECIPE</h5>
         <form onSubmit={this.handleFormSubmit} className="uk-form-stacked">
           <p>
@@ -77,7 +77,7 @@ class RecipeForm extends Component {
               className="uk-input uk-form-width-medium"
               name="name"
               value={name}
-              placeholder="Name"
+              placeholder="Title"
               onChange={this.handleChange}
             />
           </p>

@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .App {
   text-align: center;
 }
@@ -24,10 +29,17 @@
 }
 
 .main-container {
-  height: calc(100vh - 80px);
-  width: 100vw;
-  background: url("./images/lukas-blazek-261682-unsplash.jpg") center center fixed;
+  height: 100%;
+  width: 100%;
+  background: url("./images/lukas-blazek-261682-unsplash.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
   background-size: cover;
+  background-attachment: fixed;
+}
+
+.small-site {
+  height: 100vh;
 }
 
 /* components/auth/signup.js */
@@ -82,4 +94,25 @@
 .custom-recipes-container {
   width: 90%;
   padding: 5%;
+}
+
+.Recipes {
+  width: 90%;
+  padding: 5%;
+}
+
+.comment {
+  background-color: #f2f3f5;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  text-align: center;
+  margin: 5px;
+}
+
+.comment > p {
+  margin: 0;
+  padding: 5px;
 }

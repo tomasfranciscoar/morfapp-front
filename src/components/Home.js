@@ -52,7 +52,7 @@ class Home extends Component {
   render() {
     let { foundRecipes, detailedRecipe } = this.state;
     return (
-      <div className="Home main-container">
+      <div className="Home main-container small-site">
         <div className="home-container">
           <img
             src={require("../images/HatchfulExport-All/logo_transparent copy.png")}

@@ -6,7 +6,7 @@ import {
   getComments,
   getFavs
 } from "../services/recipes-services";
-import { favCustomRecipe } from "../services/auth-services"
+import { favCustomRecipe } from "../services/auth-services";
 import Swal from "sweetalert2";
 
 class CustomRecipeDetail extends Component {
@@ -16,9 +16,11 @@ class CustomRecipeDetail extends Component {
     },
     comments: [],
     favs: [],
-    userFaved: {}, 
+    userFaved: {},
     userId: JSON.parse(localStorage.getItem("USER"))._id
   };
+
+  componentWillUpdate() {}
 
   componentDidMount() {
     const { id } = this.props.match.params;
@@ -30,16 +32,15 @@ class CustomRecipeDetail extends Component {
     getComments(id)
       .then(comments => this.setState({ comments: comments }))
       .catch(err => console.log(err));
-      
+
     getFavs(id)
-      .then(favs => this.setState({favs: favs}))
+      .then(favs => this.setState({ favs: favs }))
       .catch(err => console.log(err));
   }
 
   onDelete = () => {
     const { id } = this.props.match.params;
-    deleteCustomRecipe(id)
-      .then(() => {
+    deleteCustomRecipe(id).then(() => {
       Swal.fire({
         title: "Success!",
         text: "Your recipe has been successfully deleted",
@@ -52,10 +53,13 @@ class CustomRecipeDetail extends Component {
 
   onFav = e => {
     const { id } = this.props.match.params;
-    const favs = e.target.value
+    const favs = e.target.value;
     favCustomRecipe(favs, id)
-    .then(user => console.log(user))
-    .catch(err => console.log(err))
+      .then(user => {
+        this.setState({ userFaved: user });
+        window.location.reload();
+      })
+      .catch(err => console.log(err));
   };
 
   handleChange = e => {
@@ -75,7 +79,7 @@ class CustomRecipeDetail extends Component {
     const user = JSON.parse(localStorage.getItem("USER"))._id;
     postComment(comment, user, recipe)
       .then(() => {
-          getComments(this.props.match.params.id).then(comments => {
+        getComments(this.props.match.params.id).then(comments => {
           this.setState({ comments: comments });
         });
       })
@@ -87,7 +91,7 @@ class CustomRecipeDetail extends Component {
   render() {
     const { customRecipe, userId, comments, favs } = this.state;
     return (
-      <div className="custom-recipe-detail-container main-container custom-form">
+      <div className="custom-recipe-detail-container main-container custom-form small-site">
         <div
           className="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin"
           uk-grid="true"
@@ -108,30 +112,22 @@ class CustomRecipeDetail extends Component {
                 eiusmod tempor incididunt.
               </p>
             </div>
-            <button 
-            name="favs"
-            value={userId}
-            onClick={this.onFav}
-            className="uk-button uk-primary">
-                  <span uk-icon="icon: star" /> Favs: {favs.users ? favs.users.length : 0}
-                </button>
-                <button
-                  onClick={this.onDelete}
-                  className="uk-button uk-danger"
-                >
-                  <span uk-icon="icon: trash" /> Delete
-                </button>
+            <button
+              name="favs"
+              type="submit"
+              value={userId}
+              onClick={this.onFav}
+              className="uk-button uk-primary"
+            >
+              <span uk-icon="icon: star" /> Favs:{" "}
+              {favs.users ? favs.users.length : 0}
+            </button>
+            <button onClick={this.onDelete} className="uk-button uk-danger">
+              <span uk-icon="icon: trash" /> Delete
+            </button>
           </div>
         </div>
-        {comments.length ? <h4>COMMENTS</h4> : null}
-        {comments.map((comment, i) => (
-          <div key={i}>
-            <h5>User: {comment.author.username}</h5>
-            <p>{comment.comment}</p>
-          </div>
-        ))}
-
-        <div className="comment">
+        <div className="comment-input">
           <form onSubmit={this.handleSubmit}>
             <input
               onChange={this.handleChange}
@@ -144,6 +140,14 @@ class CustomRecipeDetail extends Component {
             <button className="uk-button uk-button-primary">Comment</button>
           </form>
         </div>
+
+        {comments.map((comment, i) => (
+          <div key={i} className="comment">
+            <p>
+              <strong>{comment.author.username}</strong>: {comment.comment}
+            </p>
+          </div>
+        ))}
       </div>
     );
   }

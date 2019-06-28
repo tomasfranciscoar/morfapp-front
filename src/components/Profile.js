@@ -29,13 +29,15 @@ class Profile extends Component {
     const { myRecipes, myFavs } = this.state;
     console.log(myFavs);
     return (
-      <div className="profile-container main-container">
+      <div className="profile-container main-container small-site">
         <div>Welcome, {user.name}!</div>
+        {<a href={user.profilePicture} target="_blank">
         <img
           src={user.profilePicture}
           alt={`${user.name}'s profile pic`}
           style={{ width: "200px", borderRadius: "5px" }}
         />
+        </a>}
         <div>
           <Link to={`/user/edit/${user._id}`}>
             <button className="uk-button uk-button-secondary">

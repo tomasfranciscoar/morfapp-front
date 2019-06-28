@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { getRecipes, deleteCustomRecipe } from "../services/recipes-services";
+import { getRecipes } from "../services/recipes-services";
 import { Link } from "react-router-dom";
-import Swal from "sweetalert2";
 
 class CustomRecipes extends Component {
   state = {
