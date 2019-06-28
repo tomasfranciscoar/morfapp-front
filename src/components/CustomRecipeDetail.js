@@ -91,7 +91,7 @@ class CustomRecipeDetail extends Component {
   render() {
     const { customRecipe, userId, comments, favs } = this.state;
     return (
-      <div className="custom-recipe-detail-container main-container custom-form small-site">
+      <div className="custom-recipe-detail-container main-container small-site">
         <div
           className="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin"
           uk-grid="true"
@@ -128,7 +128,7 @@ class CustomRecipeDetail extends Component {
           </div>
         </div>
         <div className="comment-input">
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} className="comment-form">
             <input
               onChange={this.handleChange}
               className="uk-input"
@@ -140,14 +140,15 @@ class CustomRecipeDetail extends Component {
             <button className="uk-button uk-button-primary">Comment</button>
           </form>
         </div>
-
-        {comments.map((comment, i) => (
-          <div key={i} className="comment">
-            <p>
-              <strong>{comment.author.username}</strong>: {comment.comment}
-            </p>
-          </div>
-        ))}
+        <div className="comments">
+          {comments.map((comment, i) => (
+            <div key={i} className="comment">
+              <p>
+                <strong>{comment.author.username}</strong>: {comment.comment}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }

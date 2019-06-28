@@ -19,7 +19,7 @@ class CustomRecipes extends Component {
     const { customRecipes } = this.state;
     return (
         <div className="custom-recipes-container main-container">
-          <div className="uk-child-width-1-3@m" uk-grid="true">
+          <div className="uk-child-width-1-3@m uk-grid-match" uk-grid="true">
             {customRecipes.map((recipe, i) => (
               <div key={i}>
                 <div className="uk-card uk-card-default">
