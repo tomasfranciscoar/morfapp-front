@@ -20,8 +20,6 @@ class CustomRecipeDetail extends Component {
     userId: JSON.parse(localStorage.getItem("USER"))._id
   };
 
-  componentWillUpdate() {}
-
   componentDidMount() {
     const { id } = this.props.match.params;
 
@@ -42,9 +40,9 @@ class CustomRecipeDetail extends Component {
     const { id } = this.props.match.params;
     deleteCustomRecipe(id).then(() => {
       Swal.fire({
-        title: "Success!",
+        title: "Deleted!",
         text: "Your recipe has been successfully deleted",
-        type: "error",
+        type: "warning",
         confirmButtonText: "Cool"
       });
       this.props.history.push("/recipes");
@@ -55,9 +53,10 @@ class CustomRecipeDetail extends Component {
     const { id } = this.props.match.params;
     const favs = e.target.value;
     favCustomRecipe(favs, id)
-      .then(user => {
-        this.setState({ userFaved: user });
-        window.location.reload();
+      .then(() => {
+        getFavs(id)
+          .then(favs => this.setState({ favs: favs }))
+          .catch(err => console.log(err));
       })
       .catch(err => console.log(err));
   };
@@ -90,6 +89,8 @@ class CustomRecipeDetail extends Component {
 
   render() {
     const { customRecipe, userId, comments, favs } = this.state;
+    const id = JSON.parse(localStorage.getItem("USER"))._id
+    console.log(customRecipe)
     return (
       <div className="custom-recipe-detail-container main-container small-site">
         <div
@@ -107,24 +108,24 @@ class CustomRecipeDetail extends Component {
           <div>
             <div className="uk-card-body">
               <h3 className="uk-card-title">{customRecipe.name}</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt.
-              </p>
+              <h5>INGREDIENTS:</h5>
+              <p>{customRecipe.ingredients}</p>
+              <button
+                name="favs"
+                type="submit"
+                value={userId}
+                onClick={this.onFav}
+                className="uk-button uk-primary"
+              >
+                <span uk-icon="icon: star" /> Favs:{" "}
+                {favs.users ? favs.users.length : 0}
+              </button>
+              {customRecipe.author ? 
+                (customRecipe.author._id === id ? <button onClick={this.onDelete} className="uk-button uk-danger">
+                <span uk-icon="icon: trash" /> Delete
+              </button> : null) : null
+              }
             </div>
-            <button
-              name="favs"
-              type="submit"
-              value={userId}
-              onClick={this.onFav}
-              className="uk-button uk-primary"
-            >
-              <span uk-icon="icon: star" /> Favs:{" "}
-              {favs.users ? favs.users.length : 0}
-            </button>
-            <button onClick={this.onDelete} className="uk-button uk-danger">
-              <span uk-icon="icon: trash" /> Delete
-            </button>
           </div>
         </div>
         <div className="comment-input">

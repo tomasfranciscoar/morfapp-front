@@ -26,6 +26,10 @@ class RecipeForm extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
+    const {recipe} = this.state;
+    if(recipe.name.length === 0 || recipe.ingredients.length === 0 || recipe.difficulty.length === 0){
+      return this.setState({error: "You must complete every field"})
+    }
     this.onUpload();
   };
 

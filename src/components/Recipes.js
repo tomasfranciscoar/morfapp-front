@@ -9,7 +9,7 @@ const Recipes = ({
 }) => (
   <div className="Recipes main-container">
     {!Object.keys(detailedRecipe).length ? (
-      <div className="uk-child-width-1-3@m" uk-grid="true">
+      <div className="uk-child-width-1-3@m uk-grid-match" uk-grid="true">
         {recipes.map((recipe, i) => (
           <div key={i}>
           <div className="uk-card uk-card-default uk-card-hover uk-card-small">

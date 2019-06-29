@@ -27,13 +27,13 @@ class NavbarWithUser extends Component {
         <div className="uk-navbar-left">
           <ul className="uk-navbar-nav">
             <li className="uk-active">
-              <Link to="/">Home</Link>
+              <Link to="/" uk-icon="icon: home"></Link>
             </li>
             <li>
-              <Link to="/recipes">Recipes</Link>
+              <Link to="/recipes" uk-icon="icon: file-text"></Link>
             </li>
             <li>
-              <Link to="/recipes/new">Upload</Link>
+              <Link to="/recipes/new" uk-icon="icon: upload"></Link>
             </li>
           </ul>
         </div>

@@ -31,7 +31,7 @@
 .main-container {
   height: 100%;
   width: 100%;
-  background: url("./images/lukas-blazek-261682-unsplash.jpg");
+  background: url("./images/brooke-lark-385507-unsplash.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -79,16 +79,6 @@
 
 .health-label {
   margin: 5px;
-}
-
-.profile-lists-container {
-  display: flex;
-  justify-content: space-around;
-}
-
-.profile-lists-container li {
-  list-style-type: none;
-  text-align: left;
 }
 
 .custom-recipes-container {
@@ -145,4 +135,46 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.edit-profile-button, .profile-picture {
+  margin-top: 10px;
+}
+
+.profile-lists-main-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.profile-list-container {
+  width: 40%;
+}
+
+.profile-list {}
+
+.profile-list-item {
+  background-color: #f2f3f5;
+  border-radius: 10px;
+  list-style-type: none;
+  text-align: left;
+  margin: 5px 0;
+  line-height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-list-name {
+  margin-left: 8px;
+}
+
+.profile-list-img {
+  margin-right: 8px;
+  width: 30px;
+  height: 30px;
+}
+
+.custom-recipe-card-text {
+  text-align: left;
 }

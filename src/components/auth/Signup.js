@@ -104,7 +104,7 @@ class Signup extends Component {
               onChange={e => this.handleChange(e)}
             />
           </p>
-          <p className="uk-alert-danger" uk-alert="true">(Password must be at least 8 characters long)</p>
+          <p className="uk-alert-danger">(Password must be at least 8 characters long)</p>
           
           {error && (
                 <div className="uk-alert-danger" uk-alert="true">

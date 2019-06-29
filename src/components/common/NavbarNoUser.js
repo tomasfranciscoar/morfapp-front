@@ -10,7 +10,10 @@ class NavbarNoUser extends Component {
         <div className="uk-navbar-left">
           <ul className="uk-navbar-nav">
             <li className="uk-active">
-              <Link to="/">Home</Link>
+              <Link to="/" uk-icon="icon: home"></Link>
+            </li>
+            <li>
+              <Link to="/signup" uk-icon="icon: upload"></Link>
             </li>
           </ul>
         </div>

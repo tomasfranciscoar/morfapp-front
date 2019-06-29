@@ -14,6 +14,14 @@ class Home extends Component {
     this.setState({ [name]: value });
   };
 
+  clearHome = () => {
+    this.setState({
+      ingredient: "",
+      foundRecipes: [],
+      detailedRecipe: {}
+    });
+  };
+
   handleSubmitSearch = e => {
     e.preventDefault();
     let { ingredient, foundRecipes } = this.state;
@@ -42,10 +50,10 @@ class Home extends Component {
       });
   };
 
-  handleShowDetailedRecipe = (index) => {
+  handleShowDetailedRecipe = index => {
     let { detailedRecipe, foundRecipes } = this.state;
     detailedRecipe = foundRecipes[index];
-    console.log('la detailedRecipe: ', detailedRecipe)
+    console.log("la detailedRecipe: ", detailedRecipe);
     this.setState({ foundRecipes, detailedRecipe });
   };
 
@@ -74,6 +82,14 @@ class Home extends Component {
                 type="submit"
                 value="Search!"
               />
+              {foundRecipes.length ? <button
+                onClick={this.clearHome}
+                type="button"
+                className="uk-button uk-button-secondary"
+                style={{marginLeft: "5px"}}
+              >
+                CLEAR
+              </button> : null}
             </p>
           </form>
           {foundRecipes.length ? (

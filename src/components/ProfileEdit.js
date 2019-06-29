@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { editProfile } from "../services/auth-services";
 import Swal from "sweetalert2";
+import {Link} from "react-router-dom"
 
 class ProfileEdit extends Component {
   state = {
@@ -62,7 +63,7 @@ class ProfileEdit extends Component {
   };
 
   render() {
-    const { name, lastname, username } = this.state.user;
+    const { name, lastname, username, id } = this.state.user;
     const { error } = this.state;
     return (
       <div className="profile-edit-container main-container custom-form small-site">
@@ -119,6 +120,9 @@ class ProfileEdit extends Component {
               type="submit"
               value="Edit"
             />
+            <Link to={`/user/${id}`}>
+              <button type="button" className="uk-button uk-button-secondary" style={{marginLeft: "5px"}}>CANCEL</button>
+            </Link>
           </p>
         </form>
       </div>
