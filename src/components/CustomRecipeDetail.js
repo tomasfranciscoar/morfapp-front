@@ -90,7 +90,6 @@ class CustomRecipeDetail extends Component {
   render() {
     const { customRecipe, userId, comments, favs } = this.state;
     const id = JSON.parse(localStorage.getItem("USER"))._id
-    console.log(customRecipe)
     return (
       <div className="custom-recipe-detail-container main-container small-site">
         <div

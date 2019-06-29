@@ -28,7 +28,6 @@ class ProfileEdit extends Component {
     }
     user[field] = e.target.value;
     this.setState({ user });
-    console.log(user);
   };
 
   onEdit = () => {
@@ -59,7 +58,7 @@ class ProfileEdit extends Component {
         });
         this.props.history.push(`/user/${profile.id}`);
       })
-      .catch(error => console.log("el error desde profileEdit: ", error));
+      .catch(error => console.log(error));
   };
 
   render() {

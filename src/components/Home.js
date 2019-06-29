@@ -32,10 +32,6 @@ class Home extends Component {
       .then(() => {
         this.setState({ foundRecipes });
       });
-    console.log("Los ingredientes: ", ingredient);
-    setTimeout(() => {
-      console.log("Las recetas: ", foundRecipes);
-    }, 3000);
   };
 
   handleSearchLabels = e => {
@@ -53,7 +49,6 @@ class Home extends Component {
   handleShowDetailedRecipe = index => {
     let { detailedRecipe, foundRecipes } = this.state;
     detailedRecipe = foundRecipes[index];
-    console.log("la detailedRecipe: ", detailedRecipe);
     this.setState({ foundRecipes, detailedRecipe });
   };
 

@@ -27,8 +27,6 @@ class Profile extends Component {
   render() {
     const user = this.state.profile;
     const { myRecipes, myFavs } = this.state;
-    console.log(myFavs);
-    console.log(myRecipes);
     return (
       <div className="profile-container main-container small-site">
         {
