@@ -48,7 +48,7 @@ class Profile extends Component {
         </div>
         <div className="profile-lists-main-container">
           <div className="profile-list-container">
-            <h5>MY RECIPES</h5>
+            <h5 className="profile-list-title">MY RECIPES</h5>
             <ul className="profile-list">
               {myRecipes.map((recipe, i) => (
                 <Link key={i} to={`/recipe/${recipe._id}`}>
@@ -65,7 +65,7 @@ class Profile extends Component {
             </ul>
           </div>
           <div className="profile-list-container">
-            <h5>MY FAVS</h5>
+            <h5 className="profile-list-title">MY FAVS</h5>
             <ul className="profile-list">
               {myFavs.reverse().map((fav, i) => (
                 <Link key={i} to={`/recipe/${fav._id}`}>

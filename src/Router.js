@@ -21,12 +21,7 @@ class Router extends React.Component {
   getTheUser = userObj => {
     this.setState({ loggedInUser: userObj });
   };
-
-  // getTheCustomRecipes = customRec => {
-  //   this.setState({ customRecipes: customRec });
-  //   console.log('las recetas desde el router: ', this.state.customRecipes)
-  // };
-
+  
   render() {
     let { loggedInUser } = this.state;
     return (
