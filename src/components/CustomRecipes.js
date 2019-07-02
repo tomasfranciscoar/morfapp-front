@@ -19,6 +19,7 @@ class CustomRecipes extends Component {
     const { customRecipes } = this.state;
     return (
       <div className="custom-recipes-container main-container">
+        <h2>USERS' RECIPES</h2>
         <div className="uk-child-width-1-3@m uk-grid-match" uk-grid="true">
           {customRecipes.map((recipe, i) => (
             <div key={i}>
@@ -35,7 +36,15 @@ class CustomRecipes extends Component {
                   </Link>
                   <div className="custom-recipe-card-text">
                     <h5>INGREDIENTS:</h5>
-                    <p>{recipe.ingredients}</p>
+                    <ul>
+                      <li>{recipe.ingredient1}</li>
+                      {recipe.ingredient2 ? <li>{recipe.ingredient2}</li> : null}
+                      {recipe.ingredient3 ? <li>{recipe.ingredient3}</li> : null}
+                      {recipe.ingredient4 ? <li>{recipe.ingredient4}</li> : null}
+                      {recipe.ingredient5 ? <li>{recipe.ingredient5}</li> : null}
+                    </ul>
+                    <h5>INSTRUCTIONS:</h5>
+                    <p>{recipe.instructions}</p>
                   </div>
                 </div>
                 <div className="uk-card-footer">Difficulty: {recipe.difficulty}</div>

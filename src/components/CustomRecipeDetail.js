@@ -14,6 +14,7 @@ class CustomRecipeDetail extends Component {
     customRecipe: {
       comment: ""
     },
+    ingredients: "",
     comments: [],
     favs: [],
     userFaved: {},
@@ -24,7 +25,9 @@ class CustomRecipeDetail extends Component {
     const { id } = this.props.match.params;
 
     getCustomRecipe(id)
-      .then(recipe => this.setState({ customRecipe: recipe }))
+      .then(recipe =>
+        this.setState({ customRecipe: recipe, ingredients: recipe.ingredients })
+      )
       .catch(err => console.log(err));
 
     getComments(id)
@@ -89,7 +92,7 @@ class CustomRecipeDetail extends Component {
 
   render() {
     const { customRecipe, userId, comments, favs } = this.state;
-    const id = JSON.parse(localStorage.getItem("USER"))._id
+    const id = JSON.parse(localStorage.getItem("USER"))._id;
     return (
       <div className="custom-recipe-detail-container main-container small-site">
         <div
@@ -108,7 +111,15 @@ class CustomRecipeDetail extends Component {
             <div className="uk-card-body">
               <h3 className="uk-card-title">{customRecipe.name}</h3>
               <h5>INGREDIENTS:</h5>
-              <p>{customRecipe.ingredients}</p>
+              <ul>
+                <li>{customRecipe.ingredient1}</li>
+                {customRecipe.ingredient2 ? <li>{customRecipe.ingredient2}</li> : null}
+                {customRecipe.ingredient3 ? <li>{customRecipe.ingredient3}</li> : null}
+                {customRecipe.ingredient4 ? <li>{customRecipe.ingredient4}</li> : null}
+                {customRecipe.ingredient5 ? <li>{customRecipe.ingredient5}</li> : null}
+              </ul>
+              <h5>INSTRUCTIONS:</h5>
+              <p>{customRecipe.instructions}</p>
               <button
                 name="favs"
                 type="submit"
@@ -119,11 +130,16 @@ class CustomRecipeDetail extends Component {
                 <span uk-icon="icon: star" /> Favs:{" "}
                 {favs.users ? favs.users.length : 0}
               </button>
-              {customRecipe.author ? 
-                (customRecipe.author._id === id ? <button onClick={this.onDelete} className="uk-button uk-danger">
-                <span uk-icon="icon: trash" /> Delete
-              </button> : null) : null
-              }
+              {customRecipe.author ? (
+                customRecipe.author._id === id ? (
+                  <button
+                    onClick={this.onDelete}
+                    className="uk-button uk-danger"
+                  >
+                    <span uk-icon="icon: trash" /> Delete
+                  </button>
+                ) : null
+              ) : null}
             </div>
           </div>
         </div>

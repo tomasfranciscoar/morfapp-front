@@ -6,7 +6,7 @@ class RecipeForm extends Component {
   state = {
     recipe: {
       name: "",
-      ingredients: "",
+      ingredient1: "",
       difficulty: "",
       images: []
     },
@@ -21,57 +21,90 @@ class RecipeForm extends Component {
       return this.setState({ recipe });
     }
     recipe[field] = e.target.value;
-    this.setState({ recipe })
+    this.setState({ recipe });
   };
 
+  showSecondIngredient = () => {
+    const second = document.getElementsByClassName("second");
+    second[0].setAttribute("style", "display: inline");
+    second[1].setAttribute("style", "display: inline");
+  };
+
+  showThirdIngredient = () => {
+    const third = document.getElementsByClassName("third");
+    third[0].setAttribute("style", "display: inline");
+    third[1].setAttribute("style", "display: inline");
+  };
+
+  showFourthIngredient = () => {
+    const fourth = document.getElementsByClassName("fourth");
+    fourth[0].setAttribute("style", "display: inline");
+    fourth[1].setAttribute("style", "display: inline");
+  };
+
+  showFifthIngredient = () => {
+    const fifth = document.getElementsByClassName("fifth");
+    fifth[0].setAttribute("style", "display: inline");
+  };
   handleFormSubmit = e => {
     e.preventDefault();
-    const {recipe} = this.state;
-    if(recipe.name.length === 0 || recipe.ingredients.length === 0 || recipe.difficulty.length === 0){
-      return this.setState({error: "You must complete every field"})
+    const { recipe } = this.state;
+    if (
+      recipe.name.length === 0 ||
+      recipe.ingredient1.length === 0 ||
+      recipe.difficulty.length === 0
+    ) {
+      return this.setState({ error: "You must complete every field" });
     }
     this.onUpload();
   };
 
   onUpload = () => {
     let { recipe } = this.state;
-    const formData = new FormData()
-    if(recipe.images) {
+    const formData = new FormData();
+    if (recipe.images) {
       for (let image of recipe.images) {
-        formData.append('images', image)
+        formData.append("images", image);
       }
     }
-    
-    for(let key in recipe) {
-      formData.append(key, recipe[key])
+
+    for (let key in recipe) {
+      formData.append(key, recipe[key]);
+      console.log(key, recipe[key]);
     }
-    
-    if(localStorage.length){
-      formData.append('author', JSON.parse(localStorage.getItem('USER'))._id)
+
+    if (localStorage.length) {
+      formData.append("author", JSON.parse(localStorage.getItem("USER"))._id);
     }
 
     uploadRecipe(formData)
-      .then(
-        rec => {
-          console.log("recipe upload successful! ", rec);
+      .then(rec => {
+        console.log("recipe upload successful! ", rec);
         Swal.fire({
           title: "Success!",
           text: "Your recipe has been successfully uploaded",
           type: "success",
           confirmButtonText: "Cool"
         });
-        this.props.history.push(`/recipe/${rec._id}`)
-        }
-      )
+        this.props.history.push(`/recipe/${rec._id}`);
+      })
       .catch(error => {
         return this.setState({ error: error.message });
       });
   };
 
   render() {
-    let { name, ingredients } = this.state.recipe;
+    let {
+      name,
+      instructions,
+      ingredient1,
+      ingredient2,
+      ingredient3,
+      ingredient4,
+      ingredient5
+    } = this.state.recipe;
     const { error } = this.state;
-    
+
     return (
       <div className="custom-form main-container small-site">
         <h5>UPLOAD RECIPE</h5>
@@ -86,11 +119,96 @@ class RecipeForm extends Component {
             />
           </p>
           <p>
+            <div>
+              <input
+                className="uk-input uk-form-width-medium"
+                name="ingredient1"
+                value={ingredient1}
+                placeholder="Ingredients"
+                onChange={this.handleChange}
+              />
+              <button
+                className="uk-button uk-button-primary"
+                type="button"
+                onClick={this.showSecondIngredient}
+              >
+                +
+              </button>
+            </div>
+            <div>
+              <input
+                className="uk-input uk-form-width-medium second"
+                name="ingredient2"
+                value={ingredient2}
+                placeholder="Ingredients"
+                onChange={this.handleChange}
+                style={{ display: "none" }}
+              />
+              <button
+                className="uk-button uk-button-primary second"
+                type="button"
+                onClick={this.showThirdIngredient}
+                style={{ display: "none" }}
+              >
+                +
+              </button>
+            </div>
+            <div>
+              <input
+                className="uk-input uk-form-width-medium third"
+                name="ingredient3"
+                value={ingredient3}
+                placeholder="Ingredients"
+                onChange={this.handleChange}
+                id="ingredient3"
+                style={{ display: "none" }}
+              />
+              <button
+                className="uk-button uk-button-primary third"
+                type="button"
+                onClick={this.showFourthIngredient}
+                style={{ display: "none" }}
+              >
+                +
+              </button>
+            </div>
+            <div>
+              <input
+                className="uk-input uk-form-width-medium fourth"
+                name="ingredient4"
+                value={ingredient4}
+                placeholder="Ingredients"
+                onChange={this.handleChange}
+                id="ingredient4"
+                style={{ display: "none" }}
+              />
+              <button
+                className="uk-button uk-button-primary fourth"
+                type="button"
+                onClick={this.showFifthIngredient}
+                style={{ display: "none" }}
+              >
+                +
+              </button>
+            </div>
+            <div>
+              <input
+                className="uk-input uk-form-width-medium fifth"
+                name="ingredient5"
+                value={ingredient5}
+                placeholder="Ingredients"
+                onChange={this.handleChange}
+                id="ingredient5"
+                style={{ display: "none" }}
+              />
+            </div>
+          </p>
+          <p>
             <textarea
               className="uk-textarea uk-form-width-medium"
-              name="ingredients"
-              value={ingredients}
-              placeholder="Ingredients"
+              name="instructions"
+              value={instructions}
+              placeholder="Instructions"
               onChange={this.handleChange}
             />
           </p>
@@ -120,9 +238,11 @@ class RecipeForm extends Component {
             />
           </p>
 
-          {error && <div className="uk-alert-danger" uk-alert="true">
-            <p>{error}</p>
-          </div>}
+          {error && (
+            <div className="uk-alert-danger" uk-alert="true">
+              <p>{error}</p>
+            </div>
+          )}
 
           <p>
             <input type="submit" className="uk-button uk-button-primary" />

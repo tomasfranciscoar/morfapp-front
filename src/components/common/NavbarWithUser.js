@@ -23,7 +23,7 @@ class NavbarWithUser extends Component {
     const { profile } = this.state;
     const id = JSON.parse(localStorage.getItem("USER"))._id;
     return (
-      <nav className="uk-navbar-container" uk-navbar="true">
+      <nav className="uk-navbar-container" uk-navbar="true" uk-sticky="true">
         <div className="uk-navbar-left">
           <ul className="uk-navbar-nav">
             <li className="uk-active">
