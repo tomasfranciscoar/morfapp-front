@@ -162,6 +162,7 @@ class CustomRecipeDetail extends Component {
               <p>
                 <strong>{comment.author.username}</strong>: {comment.comment}
               </p>
+              <p style={{fontSize: "8px"}}>Posted on {comment.createdAt.slice(0, 10)} at {comment.createdAt.slice(11, 19)}</p>
             </div>
           ))}
         </div>
