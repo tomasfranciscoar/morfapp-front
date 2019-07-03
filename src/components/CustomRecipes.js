@@ -4,22 +4,47 @@ import { Link } from "react-router-dom";
 
 class CustomRecipes extends Component {
   state = {
-    customRecipes: []
+    customRecipes: [],
+    newCustomRecipes: []
   };
 
   componentWillMount() {
     getRecipes()
       .then(recipes => {
-        this.setState({ customRecipes: recipes.reverse() });
+        this.setState({ customRecipes: recipes.reverse(), newCustomRecipes: recipes.reverse() });
       })
       .catch(error => console.log(error));
+  };
+
+  handleSearch = e => {
+    let { search, customRecipes, newCustomRecipes } = this.state;
+    search = e.target.value;
+    console.log(search)
+    customRecipes = newCustomRecipes.filter(recipe => {
+      // var object = []
+      // object.push(Object.values(recipe))
+      // object.map(item => {
+      //   if(item.includes(search)){
+      //     return true
+      //   }
+      // })
+      if (Object.values(recipe).indexOf(search) > -1) {
+        return true
+     }
+      if (search === ""){
+        return newCustomRecipes
+      }
+    })
+    // customRecipes = newCustomRecipes.filter(recipe => Object.values(recipe).map(item => item.includes(search)))
+    this.setState({ customRecipes })
   }
 
   render() {
-    const { customRecipes } = this.state;
+    const { customRecipes, search } = this.state;
     return (
       <div className="custom-recipes-container main-container">
         <h2>USERS' RECIPES</h2>
+        <input type="search" value={search} onChange={this.handleSearch} placeholder="Search..." className="uk-input uk-form-width-large search-custom-recipes" />
         <div className="uk-child-width-1-3@m uk-grid-match" uk-grid="true">
           {customRecipes.map((recipe, i) => (
             <div key={i}>
