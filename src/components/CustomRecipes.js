@@ -23,7 +23,10 @@ class CustomRecipes extends Component {
       if (search === ""){
         return newCustomRecipes
       };
-      return recipe.chips[0].toLowerCase().includes(search.toLowerCase())
+      for(let i=0; i<recipe.chips.length; i++){
+        var filtered = recipe.chips[i].toLowerCase().includes(search.toLowerCase())
+      }
+      return filtered;
     })
     this.setState({ customRecipes })
   }
