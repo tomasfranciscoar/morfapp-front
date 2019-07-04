@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import { uploadRecipe } from "../services/recipes-services";
 import Swal from "sweetalert2";
+import Chips, { Chip } from "react-chips";
 
 class RecipeForm extends Component {
   state = {
     recipe: {
       name: "",
-      ingredient1: "",
       difficulty: "",
       images: []
     },
-    recipes: []
+    recipes: [],
+    chips: []
   };
 
   handleChange = e => {
@@ -22,6 +23,10 @@ class RecipeForm extends Component {
     }
     recipe[field] = e.target.value;
     this.setState({ recipe });
+  };
+
+  handleChips = chips => {
+    this.setState({ chips });
   };
 
   showSecondIngredient = () => {
@@ -48,10 +53,10 @@ class RecipeForm extends Component {
   };
   handleFormSubmit = e => {
     e.preventDefault();
-    const { recipe } = this.state;
+    const { recipe, chips } = this.state;
     if (
       recipe.name.length === 0 ||
-      recipe.ingredient1.length === 0 ||
+      chips.length === 0 ||
       recipe.difficulty.length === 0
     ) {
       return this.setState({ error: "You must complete every field" });
@@ -94,16 +99,8 @@ class RecipeForm extends Component {
   };
 
   render() {
-    let {
-      name,
-      instructions,
-      ingredient1,
-      ingredient2,
-      ingredient3,
-      ingredient4,
-      ingredient5
-    } = this.state.recipe;
-    const { error } = this.state;
+    let { name, instructions } = this.state.recipe;
+    const { error, chips } = this.state;
 
     return (
       <div className="custom-form main-container small-site">
@@ -120,86 +117,12 @@ class RecipeForm extends Component {
           </p>
           <p>
             <div>
-              <input
+              <Chips
                 className="uk-input uk-form-width-medium"
-                name="ingredient1"
-                value={ingredient1}
+                name="chips"
+                value={chips}
                 placeholder="Ingredients"
-                onChange={this.handleChange}
-              />
-              <button
-                className="uk-button uk-button-primary"
-                type="button"
-                onClick={this.showSecondIngredient}
-              >
-                +
-              </button>
-            </div>
-            <div>
-              <input
-                className="uk-input uk-form-width-medium second"
-                name="ingredient2"
-                value={ingredient2}
-                placeholder="Ingredients"
-                onChange={this.handleChange}
-                style={{ display: "none" }}
-              />
-              <button
-                className="uk-button uk-button-primary second"
-                type="button"
-                onClick={this.showThirdIngredient}
-                style={{ display: "none" }}
-              >
-                +
-              </button>
-            </div>
-            <div>
-              <input
-                className="uk-input uk-form-width-medium third"
-                name="ingredient3"
-                value={ingredient3}
-                placeholder="Ingredients"
-                onChange={this.handleChange}
-                id="ingredient3"
-                style={{ display: "none" }}
-              />
-              <button
-                className="uk-button uk-button-primary third"
-                type="button"
-                onClick={this.showFourthIngredient}
-                style={{ display: "none" }}
-              >
-                +
-              </button>
-            </div>
-            <div>
-              <input
-                className="uk-input uk-form-width-medium fourth"
-                name="ingredient4"
-                value={ingredient4}
-                placeholder="Ingredients"
-                onChange={this.handleChange}
-                id="ingredient4"
-                style={{ display: "none" }}
-              />
-              <button
-                className="uk-button uk-button-primary fourth"
-                type="button"
-                onClick={this.showFifthIngredient}
-                style={{ display: "none" }}
-              >
-                +
-              </button>
-            </div>
-            <div>
-              <input
-                className="uk-input uk-form-width-medium fifth"
-                name="ingredient5"
-                value={ingredient5}
-                placeholder="Ingredients"
-                onChange={this.handleChange}
-                id="ingredient5"
-                style={{ display: "none" }}
+                onChange={this.handleChips}
               />
             </div>
           </p>
