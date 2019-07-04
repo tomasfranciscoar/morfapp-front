@@ -19,23 +19,12 @@ class CustomRecipes extends Component {
   handleSearch = e => {
     let { search, customRecipes, newCustomRecipes } = this.state;
     search = e.target.value;
-    console.log(search)
     customRecipes = newCustomRecipes.filter(recipe => {
-      // var object = []
-      // object.push(Object.values(recipe))
-      // object.map(item => {
-      //   if(item.includes(search)){
-      //     return true
-      //   }
-      // })
-      if (Object.values(recipe).indexOf(search) > -1) {
-        return true
-     }
       if (search === ""){
         return newCustomRecipes
-      }
+      };
+      return recipe.chips[0].toLowerCase().includes(search.toLowerCase())
     })
-    // customRecipes = newCustomRecipes.filter(recipe => Object.values(recipe).map(item => item.includes(search)))
     this.setState({ customRecipes })
   }
 

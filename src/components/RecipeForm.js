@@ -27,30 +27,9 @@ class RecipeForm extends Component {
 
   handleChips = chips => {
     this.setState({ chips });
+    console.log('chips: ', chips)
   };
 
-  showSecondIngredient = () => {
-    const second = document.getElementsByClassName("second");
-    second[0].setAttribute("style", "display: inline");
-    second[1].setAttribute("style", "display: inline");
-  };
-
-  showThirdIngredient = () => {
-    const third = document.getElementsByClassName("third");
-    third[0].setAttribute("style", "display: inline");
-    third[1].setAttribute("style", "display: inline");
-  };
-
-  showFourthIngredient = () => {
-    const fourth = document.getElementsByClassName("fourth");
-    fourth[0].setAttribute("style", "display: inline");
-    fourth[1].setAttribute("style", "display: inline");
-  };
-
-  showFifthIngredient = () => {
-    const fifth = document.getElementsByClassName("fifth");
-    fifth[0].setAttribute("style", "display: inline");
-  };
   handleFormSubmit = e => {
     e.preventDefault();
     const { recipe, chips } = this.state;
@@ -65,7 +44,7 @@ class RecipeForm extends Component {
   };
 
   onUpload = () => {
-    let { recipe } = this.state;
+    let { recipe, chips } = this.state;
     const formData = new FormData();
     if (recipe.images) {
       for (let image of recipe.images) {
@@ -77,6 +56,8 @@ class RecipeForm extends Component {
       formData.append(key, recipe[key]);
       console.log(key, recipe[key]);
     }
+
+    formData.append('chips', chips);
 
     if (localStorage.length) {
       formData.append("author", JSON.parse(localStorage.getItem("USER"))._id);
@@ -108,7 +89,7 @@ class RecipeForm extends Component {
         <form onSubmit={this.handleFormSubmit} className="uk-form-stacked">
           <p>
             <input
-              className="uk-input uk-form-width-medium"
+              className="uk-input uk-form-width-large"
               name="name"
               value={name}
               placeholder="Title"
@@ -118,7 +99,7 @@ class RecipeForm extends Component {
           <p>
             <div>
               <Chips
-                className="uk-input uk-form-width-medium"
+                className="uk-input uk-form-width-large"
                 name="chips"
                 value={chips}
                 placeholder="Ingredients"
@@ -128,7 +109,7 @@ class RecipeForm extends Component {
           </p>
           <p>
             <textarea
-              className="uk-textarea uk-form-width-medium"
+              className="uk-textarea uk-form-width-large"
               name="instructions"
               value={instructions}
               placeholder="Instructions"
@@ -139,7 +120,7 @@ class RecipeForm extends Component {
             <select
               onChange={this.handleChange}
               name="difficulty"
-              className="uk-select uk-form-width-medium"
+              className="uk-select uk-form-width-large"
             >
               <option selected={true} disabled={true}>
                 Difficulty level
