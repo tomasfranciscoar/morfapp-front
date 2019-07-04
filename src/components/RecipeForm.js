@@ -27,7 +27,7 @@ class RecipeForm extends Component {
 
   handleChips = chips => {
     this.setState({ chips });
-    console.log('chips: ', chips)
+    console.log("chips: ", chips);
   };
 
   handleFormSubmit = e => {
@@ -57,7 +57,10 @@ class RecipeForm extends Component {
       console.log(key, recipe[key]);
     }
 
-    formData.append('chips', chips);
+    let arr = chips;
+    for (var i = 0; i < arr.length; i++) {
+      formData.append("chips", arr[i]);
+    }
 
     if (localStorage.length) {
       formData.append("author", JSON.parse(localStorage.getItem("USER"))._id);

@@ -51,11 +51,7 @@ class CustomRecipes extends Component {
                   <div className="custom-recipe-card-text">
                     <h5>INGREDIENTS:</h5>
                     <ul>
-                      <li>{recipe.ingredient1}</li>
-                      {recipe.ingredient2 ? <li>{recipe.ingredient2}</li> : null}
-                      {recipe.ingredient3 ? <li>{recipe.ingredient3}</li> : null}
-                      {recipe.ingredient4 ? <li>{recipe.ingredient4}</li> : null}
-                      {recipe.ingredient5 ? <li>{recipe.ingredient5}</li> : null}
+                      {recipe.chips.map(chip => <li>{chip}</li>)}
                     </ul>
                     <h5>INSTRUCTIONS:</h5>
                     <p>{recipe.instructions}</p>

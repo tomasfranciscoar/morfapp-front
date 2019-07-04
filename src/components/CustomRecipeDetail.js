@@ -93,6 +93,7 @@ class CustomRecipeDetail extends Component {
   render() {
     const { customRecipe, userId, comments, favs } = this.state;
     const id = JSON.parse(localStorage.getItem("USER"))._id;
+    console.log('la receta en el render: ', customRecipe)
     return (
       <div className="custom-recipe-detail-container main-container small-site">
         <div
@@ -112,11 +113,7 @@ class CustomRecipeDetail extends Component {
               <h3 className="uk-card-title">{customRecipe.name}</h3>
               <h5>INGREDIENTS:</h5>
               <ul>
-                <li>{customRecipe.ingredient1}</li>
-                {customRecipe.ingredient2 ? <li>{customRecipe.ingredient2}</li> : null}
-                {customRecipe.ingredient3 ? <li>{customRecipe.ingredient3}</li> : null}
-                {customRecipe.ingredient4 ? <li>{customRecipe.ingredient4}</li> : null}
-                {customRecipe.ingredient5 ? <li>{customRecipe.ingredient5}</li> : null}
+                {customRecipe.chips ? customRecipe.chips.map((chip, i) => <li key={i}>{chip}</li>) : null}
               </ul>
               <h5>INSTRUCTIONS:</h5>
               <p>{customRecipe.instructions}</p>
