@@ -190,3 +190,7 @@
   border-radius: 5px;
   border: 0.5px solid lightgray ;
 } 
+
+.custom-ingredients-list {
+  text-align: left;
+}

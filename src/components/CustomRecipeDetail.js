@@ -110,11 +110,11 @@ class CustomRecipeDetail extends Component {
             <canvas width="600" height="400" />
           </div>
           <div>
-            <div className="uk-card-body">
+            <div className="uk-card-body custom-recipe-detail-body">
               <h3 className="uk-card-title">{customRecipe.name}</h3>
               <h5>INGREDIENTS:</h5>
               <ul>
-                {customRecipe.chips ? customRecipe.chips.map((chip, i) => <li key={i}>{chip}</li>) : null}
+                {customRecipe.chips ? customRecipe.chips.map((chip, i) => <li key={i} className="custom-ingredients-list">{chip}</li>) : null}
               </ul>
               <h5>INSTRUCTIONS:</h5>
               <p>{customRecipe.instructions}</p>

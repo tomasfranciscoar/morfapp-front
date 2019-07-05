@@ -54,6 +54,7 @@ class Home extends Component {
 
   render() {
     let { foundRecipes, detailedRecipe } = this.state;
+    console.log(foundRecipes)
     return (
       <div className="Home main-container small-site">
         <div className="home-container">

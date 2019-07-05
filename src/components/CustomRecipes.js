@@ -78,7 +78,7 @@ class CustomRecipes extends Component {
           type="search"
           value={search}
           onChange={this.handleSearch}
-          placeholder="Search..."
+          placeholder="Search by ingredient"
           className="uk-input uk-form-width-large search-custom-recipes"
         />
         <div className="uk-child-width-1-3@m uk-grid-match" uk-grid="true">

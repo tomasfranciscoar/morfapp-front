@@ -21,6 +21,7 @@ class RecipeDetail extends Component{
                 <li key={i}>{ingredient}</li>
                 )}
               </ul>
+              <a href={detailedRecipe.recipe.url} target="_blank">Go to the recipe</a>
             </div>
           </div>
         </div>
