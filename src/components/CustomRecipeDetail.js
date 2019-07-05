@@ -8,6 +8,7 @@ import {
 } from "../services/recipes-services";
 import { favCustomRecipe } from "../services/auth-services";
 import Swal from "sweetalert2";
+import {Link} from "react-router-dom";
 
 class CustomRecipeDetail extends Component {
   state = {

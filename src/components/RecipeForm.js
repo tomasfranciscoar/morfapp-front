@@ -89,7 +89,7 @@ class RecipeForm extends Component {
     return (
       <div className="custom-form main-container small-site">
         <h5>UPLOAD RECIPE</h5>
-        <form onSubmit={this.handleFormSubmit} className="uk-form-stacked">
+        <form onSubmit={this.handleFormSubmit} className="uk-form-stacked recipe-form">
           <p>
             <input
               className="uk-input uk-form-width-large"
