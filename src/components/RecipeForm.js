@@ -26,8 +26,7 @@ class RecipeForm extends Component {
   };
 
   handleChips = chips => {
-    this.setState({ chips });
-    console.log("chips: ", chips);
+    this.setState({ chips })
   };
 
   handleFormSubmit = e => {
@@ -54,7 +53,6 @@ class RecipeForm extends Component {
 
     for (let key in recipe) {
       formData.append(key, recipe[key]);
-      console.log(key, recipe[key]);
     }
 
     let arr = chips;
@@ -68,7 +66,6 @@ class RecipeForm extends Component {
 
     uploadRecipe(formData)
       .then(rec => {
-        console.log("recipe upload successful! ", rec);
         Swal.fire({
           title: "Success!",
           text: "Your recipe has been successfully uploaded",
