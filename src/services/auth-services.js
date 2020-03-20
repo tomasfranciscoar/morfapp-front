@@ -7,7 +7,7 @@ const base_url = isProduction
 
 const logoutRedirect = isProduction
   ? "https://morfapp.herokuapp.com"
-  : "http://localhost:3000";
+  : "http://localhost:5000";
 
 export const signup = auth => {
   return axios

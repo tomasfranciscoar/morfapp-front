@@ -22,6 +22,7 @@ class CustomRecipes extends Component {
   handleSearch = e => {
     let { search, customRecipes, newCustomRecipes } = this.state;
     search = e.target.value;
+    // broken window, must find way to make this piece of code dynamic
     customRecipes = newCustomRecipes.filter(recipe => {
       if (search === "") {
         return newCustomRecipes;

@@ -54,7 +54,6 @@ class Home extends Component {
 
   render() {
     let { foundRecipes, detailedRecipe } = this.state;
-    console.log(foundRecipes)
     return (
       <div className="Home main-container small-site">
         <div className="home-container">
@@ -63,6 +62,8 @@ class Home extends Component {
             alt="morfapp-logo"
             style={{ width: "450px", marginBottom: "20px" }}
           />
+          <h2 class="welcome" id="welcome-title">Welcome to morfApp! </h2>
+          <h4 class="welcome">Just type below your available ingredients and we'll look up some cool recipes for you to prepare.</h4>
           <form onSubmit={this.handleSubmitSearch}>
             <input
               className="uk-input uk-form-width-large"
