@@ -5,17 +5,16 @@ import { withRouter } from "react-router-dom";
 import { getProfile } from "../../services/auth-services";
 
 class NavbarWithUser extends Component {
-
   state = {
-    profile: {}
-  }
+    profile: {},
+  };
 
-  componentDidMount(){
+  componentDidMount() {
     getProfile()
-      .then(user => {
-        this.setState({profile: user})
+      .then((user) => {
+        this.setState({ profile: user });
       })
-      .catch(error => error)
+      .catch((error) => error);
   }
 
   render() {
@@ -26,14 +25,14 @@ class NavbarWithUser extends Component {
       <nav className="uk-navbar-container" uk-navbar="true" uk-sticky="true">
         <div className="uk-navbar-left">
           <ul className="uk-navbar-nav">
-            <li className="uk-active">
-              <Link to="/" uk-icon="icon: home"></Link>
+            <li className="uk-active navbar-item">
+              <Link to="/">HOME</Link>
             </li>
-            <li>
-              <Link to="/recipes" uk-icon="icon: file-text"></Link>
+            <li className="navbar-item">
+              <Link to="/recipes">RECIPES</Link>
             </li>
-            <li>
-              <Link to="/recipes/new" uk-icon="icon: upload"></Link>
+            <li className="navbar-item">
+              <Link to="/recipes/new">UPLOAD</Link>
             </li>
           </ul>
         </div>
@@ -54,11 +53,13 @@ class NavbarWithUser extends Component {
 
         <div className="uk-navbar-right">
           <ul className="uk-navbar-nav">
-            <li>
-              <Link to={`/user/${id}`}>{profile.name}</Link>
+            <li className="navbar-item">
+              <Link to={`/user/${id}`}>
+                {profile.name ? profile.name : null}
+              </Link>
             </li>
-            <li onClick={logout}>
-              <Link to="#">Logout</Link>
+            <li onClick={logout} className="navbar-item">
+              <Link to="#">{profile.name ? "Logout" : null}</Link>
             </li>
           </ul>
         </div>

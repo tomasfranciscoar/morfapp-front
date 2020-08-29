@@ -40,15 +40,15 @@
 }
 
 .welcome {
-  width: 45%;
+  width: 35%;
 }
 
 #welcome-title {
   margin-bottom: -25px;
 }
 
-.small-site {
-  height: 100vh;
+.main-container {
+  min-height: calc(100vh - 80px);
 }
 
 /* components/auth/signup.js */
@@ -107,9 +107,6 @@
 .comment {
   background-color: #f2f3f5;
   border-radius: 10px;
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
   width: 50%;
   text-align: left;
   margin: 5px;
@@ -153,7 +150,8 @@
   align-items: center;
 }
 
-.edit-profile-button, .profile-picture {
+.edit-profile-button,
+.profile-picture {
   margin-top: 10px;
 }
 
@@ -166,8 +164,6 @@
 .profile-list-container {
   width: 40%;
 }
-
-.profile-list {}
 
 .profile-list-item {
   background-color: #f2f3f5;
@@ -199,10 +195,12 @@
   margin-bottom: 10px !important;
 }
 
-.recipe-form input, .recipe-form textarea, .recipe-form select {
+.recipe-form input,
+.recipe-form textarea,
+.recipe-form select {
   border-radius: 5px;
-  border: 0.5px solid lightgray ;
-} 
+  border: 0.5px solid lightgray;
+}
 
 .custom-ingredients-list {
   text-align: left;

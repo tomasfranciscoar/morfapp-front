@@ -6,10 +6,10 @@ class Home extends Component {
   state = {
     ingredient: "",
     foundRecipes: [],
-    detailedRecipe: {}
+    detailedRecipe: {},
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
@@ -18,27 +18,27 @@ class Home extends Component {
     this.setState({
       ingredient: "",
       foundRecipes: [],
-      detailedRecipe: {}
+      detailedRecipe: {},
     });
   };
 
-  handleSubmitSearch = e => {
+  handleSubmitSearch = (e) => {
     e.preventDefault();
     let { ingredient, foundRecipes } = this.state;
     searchRecipe(ingredient)
-      .then(recipes => {
+      .then((recipes) => {
         foundRecipes = recipes;
       })
       .then(() => {
-        this.setState({ foundRecipes });
+        this.setState({ foundRecipes, ingredient: "" });
       });
   };
 
-  handleSearchLabels = e => {
+  handleSearchLabels = (e) => {
     const { value } = e.target;
     let { foundRecipes } = this.state;
     searchRecipe(value)
-      .then(recipes => {
+      .then((recipes) => {
         foundRecipes = recipes;
       })
       .then(() => {
@@ -46,7 +46,7 @@ class Home extends Component {
       });
   };
 
-  handleShowDetailedRecipe = index => {
+  handleShowDetailedRecipe = (index) => {
     let { detailedRecipe, foundRecipes } = this.state;
     detailedRecipe = foundRecipes[index];
     this.setState({ foundRecipes, detailedRecipe });
@@ -62,8 +62,13 @@ class Home extends Component {
             alt="morfapp-logo"
             style={{ width: "450px", marginBottom: "20px" }}
           />
-          <h2 class="welcome" id="welcome-title">Welcome to morfApp! </h2>
-          <h4 class="welcome">Just type below your available ingredients and we'll look up some cool recipes for you to prepare.</h4>
+          <h2 class="welcome" id="welcome-title">
+            Welcome to morfApp!{" "}
+          </h2>
+          <h4 class="welcome">
+            Just type below your available ingredients and we'll look up some
+            cool recipes for you to prepare.
+          </h4>
           <form onSubmit={this.handleSubmitSearch}>
             <input
               className="uk-input uk-form-width-large"
@@ -79,14 +84,16 @@ class Home extends Component {
                 type="submit"
                 value="Search!"
               />
-              {foundRecipes.length ? <button
-                onClick={this.clearHome}
-                type="button"
-                className="uk-button uk-button-secondary"
-                style={{marginLeft: "5px"}}
-              >
-                CLEAR
-              </button> : null}
+              {foundRecipes.length ? (
+                <button
+                  onClick={this.clearHome}
+                  type="button"
+                  className="uk-button uk-button-secondary"
+                  style={{ marginLeft: "5px" }}
+                >
+                  CLEAR
+                </button>
+              ) : null}
             </p>
           </form>
           {foundRecipes.length ? (
